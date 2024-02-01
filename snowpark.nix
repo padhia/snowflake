@@ -10,12 +10,12 @@
 
 buildPythonPackage rec {
   pname = "snowflake-snowpark-python";
-  version = "1.11.1";
+  version = "1.12.0";
   format = "setuptools";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-HwPLVGzHUCZwNu4ZhoVAdf2DNJxjRhqgG/G8SnFVvgE=";
+    hash = "sha256-ZOT0eOQydjWqZRRDSm5V4BRmrTPitDH34GlWtzU4emI=";
   };
 
   propagatedBuildInputs = [
