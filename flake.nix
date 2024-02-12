@@ -21,8 +21,9 @@
 
         sfPyPkgs = {
           snowflake-connector-python = callPackage ./snowflake-connector-python.nix {};
-          snowpark = callPackage ./snowpark.nix {};
-          sfconn = callPackage ./sfconn.nix {};
+          snowpark  = callPackage ./snowpark.nix {};
+          sfconn    = callPackage ./sfconn.nix {};
+          sfconn02x = callPackage ./sfconn02x.nix {};
         };
       in sfPyPkgs;
 
@@ -47,8 +48,9 @@
 
       in {
         sf-python = mkPyEnv "sf-python" sfPyPkgs.snowflake-connector-python;
-        sfconn = mkPyEnv "sfconn" sfPyPkgs.sfconn;
-        snowpark = mkPyEnv "snowpark" sfPyPkgs.snowpark;
+        sfconn    = mkPyEnv "sfconn" sfPyPkgs.sfconn;
+        sfconn02x = mkPyEnv "sfconn02x" sfPyPkgs.sfconn02x;
+        snowpark  = mkPyEnv "snowpark" sfPyPkgs.snowpark;
       });
 
     packages = forAllSystems (pkgs: { snowsql = pkgs.callPackage ./snowsql.nix {}; });

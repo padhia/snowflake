@@ -2,12 +2,12 @@
 
 buildPythonPackage rec {
   pname = "sfconn";
-  version = "0.3.0";
+  version = "0.2.5";
   pyproject = true;
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-TTRkeAimw2KLonRCMHwDhsW+VOvaj2te0lQcwJBtKrM=";
+    hash = "sha256-jdhR9UgHH2klrTtI0bSWN4/FSYXxJdlDhKMRW7c+AdQ=";
   };
 
   propagatedBuildInputs = [
