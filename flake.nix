@@ -15,54 +15,58 @@
 
     overlays.snowsql = final: prev: { snowsql = prev.callPackage ./snowsql.nix {}; };
 
-    pyPkgs = { pkgs, python3 }:
+    pyModules = { pkgs, py }:
       let
-        callPackage = pkgs.lib.callPackageWith (pkgs // python3.pkgs // sfPyPkgs);
-
-        sfPyPkgs = {
-          snowflake-connector-python = callPackage ./snowflake-connector-python.nix {};
-          snowpark  = callPackage ./snowpark.nix {};
-          sfconn    = callPackage ./sfconn.nix {};
-          sfconn02x = callPackage ./sfconn02x.nix {};
-        };
-      in sfPyPkgs;
+        callPackage = pkgs.lib.callPackageWith (pkgs // pkgs.${py}.pkgs // pyPkgs);
+        snowflake-connector-python = callPackage ./snowflake-connector-python.nix {};
+        snowpark    = callPackage ./snowpark.nix {};
+        pyPkgs      = { inherit snowflake-connector-python snowpark; };
+      in pyPkgs;
 
     devShells = forAllSystems (pkgs: with pkgs;
       let
-        python3 = python311;
-        sfPyPkgs = callPackage pyPkgs { inherit python3; };
+        mkDevShell = py:
+          let
+            pyPkgs = callPackage pyModules { inherit pkgs py; };
+          in
+            mkShell {
+              name = "snowflake";
+              venvDir = "./.venv";
+              buildInputs = with pkgs.python311Packages; [
+                python
+                pkgs.ruff
+                venvShellHook
+                build
+                pytest
+                pyPkgs.snowflake-connector-python
+                pyPkgs.snowpark
+              ];
+            };
 
-        mkPyEnv = name: pyPkg: mkShell {
-          inherit name;
-
-          buildInputs = [ pyPkg ] ++ (with python3.pkgs; [
-            pkgs.ruff
-            pip
-            setuptools
-            wheel
-            build
-            pytest
-            mypy
-          ]);
-        };
+        defaultPython3 = lib.replaceStrings ["."] [""] pkgs.python3.libPrefix;
 
       in {
-        sf-python = mkPyEnv "sf-python" sfPyPkgs.snowflake-connector-python;
-        sfconn    = mkPyEnv "sfconn" sfPyPkgs.sfconn;
-        sfconn02x = mkPyEnv "sfconn02x" sfPyPkgs.sfconn02x;
-        snowpark  = mkPyEnv "snowpark" sfPyPkgs.snowpark;
+        python311 = mkDevShell "python311";
+        python312 = mkDevShell "python312";
+        default   = mkDevShell defaultPython3;
       });
 
-    packages = forAllSystems (pkgs: { snowsql = pkgs.callPackage ./snowsql.nix {}; });
+    packages = forAllSystems (pkgs: with pkgs;
+      let
+        pkgNames     = [ "snowflake-connector-python" "snowpark" ];
+        allPkgs      = py: lib.genAttrs pkgNames (pkg: (pyModules { inherit pkgs py; }).${pkg});
+        forAllPy     = map (py: { name = "${py}Packages"; value = (allPkgs py); }) ["python311" "python312"];
+        allPyAllPkgs = builtins.listToAttrs(lib.flatten(forAllPy));
+      in
+        allPyAllPkgs // { snowsql = pkgs.callPackage ./snowsql.nix {}; }
+    );
 
     apps = forAllSystems (pkgs: {
-      snowsql = {
-        type = "app";
-        program = "${packages.${pkgs.stdenv.hostPlatform.system}.snowsql}/bin/snowsql";
-      };
+      snowsql.type    = "app";
+      snowsql.program = "${packages.${pkgs.system}.snowsql}/bin/snowsql";
     });
 
     in {
-      inherit devShells packages apps overlays pyPkgs;
+      inherit devShells packages apps overlays;
     };
 }
