@@ -31,16 +31,16 @@
 }:
 
 buildPythonPackage rec {
-  pname = "snowflake-connector-python";
-  version = "3.7.0";
-  format = "pyproject";
-
-  disabled = pythonOlder "3.7";
+  pname     = "snowflake-connector-python";
+  version   = "3.7.1";
+  pyproject = true;
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-sr+uxkBZMHsIyq2tQCFNSI/vtKI/zXVTrHX16nWKkWk=";
+    hash = "sha256-3GmC9lOGDt7xYUowR6FrywfiJ3Xm4JCAi79PdinEGR0=";
   };
+
+  disabled = pythonOlder "3.7";
 
   nativeBuildInputs = [
     cython
@@ -51,7 +51,6 @@ buildPythonPackage rec {
 
   pythonRelaxDeps = [
     "platformdirs"
-    "cryptography"
   ];
 
   propagatedBuildInputs = [
