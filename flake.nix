@@ -10,10 +10,10 @@
       let
         callPackage = lib.callPackageWith pkgs.${py}.pkgs;
         snowflake-connector-python = callPackage ./snowflake-connector-python.nix {};
-        snowpark = callPackage ./snowpark.nix { inherit snowflake-connector-python; };
-        snowcli  = callPackage ./snowcli.nix { inherit snowflake-connector-python; };
+        snowflake-snowpark-python = callPackage ./snowflake-snowpark-python.nix { inherit snowflake-connector-python; };
+        snowflake-cli = callPackage ./snowflake-cli.nix { inherit snowflake-connector-python; };
       in {
-        inherit snowflake-connector-python snowpark snowcli;
+        inherit snowflake-connector-python snowflake-snowpark-python snowflake-cli;
       };
 
     defaultPython = pkgs: with pkgs; lib.replaceStrings ["."] [""] python3.libPrefix;
@@ -40,7 +40,7 @@
                   build
                   pytest
                   (pyPkgs py).snowflake-connector-python
-                  (pyPkgs py).snowpark
+                  (pyPkgs py).snowflake-snowpark-python
                 ];
               };
 
@@ -53,16 +53,16 @@
           let
             allPys  = lib.genAttrs pythons pyPkgs;
             allPkgs = lib.mapAttrs' (k: v: lib.nameValuePair (k + "Packages") v) allPys;
-            snowcli = allPys.${python3}.snowcli;
             snowsql = callPackage ./snowsql.nix {};
+            snowflake-cli = allPys.${python3}.snowflake-cli;
           in
-            allPkgs // { inherit snowsql snowcli; };
+            allPkgs // { inherit snowsql snowflake-cli; };
 
         apps = {
           snowsql.type    = "app";
           snowsql.program = "${packages.snowsql}/bin/snowsql";
           snow.type       = "app";
-          snow.program    = "${packages.snowcli}/bin/snow";
+          snow.program    = "${packages.snowflake-cli}/bin/snow";
         };
 
       in {
@@ -74,13 +74,13 @@
 
     overlays = {
       snowsql = final: prev: { snowsql = prev.callPackage ./snowsql.nix {}; };
-      snowcli = final: prev:
+      snowflake-cli = final: prev:
         let
           python3 = defaultPython prev;
           pyPkgs  = mkPyPkgs prev python3;
         in {
           snowsql = prev.callPackage ./snowsql.nix {};
-          snowcli = pyPkgs.snowcli;
+          snowflake-cli = pyPkgs.snowflake-cli;
         };
     };
   };

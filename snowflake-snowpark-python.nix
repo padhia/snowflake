@@ -1,6 +1,8 @@
 { lib
 , buildPythonPackage
 , fetchPypi
+, pythonOlder
+, pythonRelaxDepsHook
 
 , setuptools
 , wheel
@@ -19,6 +21,12 @@ buildPythonPackage rec {
     inherit pname version;
     hash = "sha256-3rpvgil/02jQ7EyNj1FPWwIgNQJLE7DyVCCxI3S/wP0=";
   };
+
+  disabled = pythonOlder "3.7";
+
+  pythonRelaxDeps = [
+    "cloudpickle"
+  ];
 
   propagatedBuildInputs = [
     setuptools

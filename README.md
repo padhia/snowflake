@@ -9,7 +9,7 @@ List of provided artifacts:
 
 ## Development shells
 
-Creates Python development environment with `snowpark` and `snowflake-connector-python` packages. Following devShell names correspond to listed Python versions:
+Creates Python development environment with `snowflake-snowpark-python` and `snowflake-connector-python` packages. Following devShell names correspond to listed Python versions:
 - `python311`: Python 3.11
 - `python312`: Python 3.12
 - `default`: Using Nix's default Python version (`python3`)

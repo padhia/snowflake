@@ -28,8 +28,7 @@ buildPythonPackage rec {
   pyproject = true;
 
   src = fetchPypi {
-    pname = "snowflake_cli_labs";
-    inherit version;
+    inherit pname version;
     hash = "sha256-C/J+E2LtEAi/fopcmc+3S0ieSC7I4OAXOn1bHBPd9vk=";
   };
 
@@ -68,9 +67,9 @@ buildPythonPackage rec {
   doCheck = false;
 
   meta = with lib; {
-    changelog   = "https://github.com/Snowflake-Labs/snowcli/blob/main/RELEASE-NOTES.md";
+    changelog   = "https://github.com/snowflakedb/snowflake-cli/blob/main/RELEASE-NOTES.md";
     description = "Snowflake Developer CLI";
-    homepage    = "https://github.com/Snowflake-Labs/snowcli";
+    homepage    = "https://github.com/snowflakedb/snowflake-cli";
     license     = licenses.asl20;
     maintainers = with maintainers; [ ];
   };
