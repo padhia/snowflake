@@ -19,31 +19,28 @@
 , typer
 , urllib3
 , gitpython
+, pip
+
 , keyring
 }:
 
 buildPythonPackage rec {
   pname     = "snowflake-cli-labs";
-  version   = "2.1.0";
+  version   = "2.1.2";
   pyproject = true;
 
   src = fetchPypi {
-    inherit pname version;
-    hash = "sha256-C/J+E2LtEAi/fopcmc+3S0ieSC7I4OAXOn1bHBPd9vk=";
+    pname = "snowflake_cli_labs";
+    inherit version;
+    hash = "sha256-I+sAI8nTjJ6K4Cz8GtyudXtdBoZBpDtjsLJd1L/fC8A=";
   };
 
   disabled = pythonOlder "3.7";
+  pythonRelaxDeps = true;
 
   nativeBuildInputs = [
     pythonRelaxDepsHook
     hatchling
-  ];
-
-  pythonRelaxDeps = [
-    "coverage"
-    "gitpython"
-    "setuptools"
-    "snowflake-connector-python"
   ];
 
   propagatedBuildInputs = [
@@ -61,6 +58,7 @@ buildPythonPackage rec {
     typer
     urllib3
     gitpython
+    pip
     keyring
   ];
 
