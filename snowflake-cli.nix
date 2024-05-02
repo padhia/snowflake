@@ -5,7 +5,6 @@
 , pythonOlder
 , hatchling
 
-, coverage
 , jinja2
 , pluggy
 , pyyaml
@@ -14,25 +13,25 @@
 , requirements-parser
 , setuptools
 , snowflake-connector-python
-, strictyaml
 , tomlkit
 , typer
 , urllib3
 , gitpython
 , pip
+, pydantic
 
 , keyring
 }:
 
 buildPythonPackage rec {
   pname     = "snowflake-cli-labs";
-  version   = "2.1.2";
+  version   = "2.2.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_cli_labs";
     inherit version;
-    hash = "sha256-I+sAI8nTjJ6K4Cz8GtyudXtdBoZBpDtjsLJd1L/fC8A=";
+    hash = "sha256-n7LCQbVdsAusJn0ra6DVNEAxDxupp42pdSZhdzbRnyA=";
   };
 
   disabled = pythonOlder "3.7";
@@ -44,7 +43,6 @@ buildPythonPackage rec {
   ];
 
   propagatedBuildInputs = [
-    coverage
     jinja2
     pluggy
     pyyaml
@@ -53,12 +51,12 @@ buildPythonPackage rec {
     requirements-parser
     setuptools
     snowflake-connector-python
-    strictyaml
     tomlkit
     typer
     urllib3
     gitpython
     pip
+    pydantic
     keyring
   ];
 
