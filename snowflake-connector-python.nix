@@ -31,13 +31,13 @@
 
 buildPythonPackage rec {
   pname     = "snowflake-connector-python";
-  version   = "3.10.0";
+  version   = "3.10.1";
   pyproject = true;
 
   src = fetchPypi {
     inherit version;
     pname = "snowflake_connector_python";
-    hash  = "sha256-fHQ46Vh1O9EXS3NYHXfJKwtHqGw42OoLoeojxELrjnU=";
+    hash  = "sha256-uSFNp2znL/+OtgBm/ea5un9YoFXWj/4eepsQNPV6NLQ=";
   };
 
   disabled = pythonOlder "3.7";
