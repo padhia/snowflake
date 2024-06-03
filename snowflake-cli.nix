@@ -8,10 +8,12 @@
 , jinja2
 , pluggy
 , pyyaml
+, packaging
 , rich
 , requests
 , requirements-parser
 , setuptools
+, snowflake-core
 , snowflake-connector-python
 , tomlkit
 , typer
@@ -25,13 +27,13 @@
 
 buildPythonPackage rec {
   pname     = "snowflake-cli-labs";
-  version   = "2.3.1";
+  version   = "2.4.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_cli_labs";
     inherit version;
-    hash = "sha256-zPYsTc3v4MiNn8rdGw7X8Jaqi1x8nfaPcNstnGYJQu8=";
+    hash = "sha256-XH//nAEtZr2vHc8i+PDPbiWNLZLQ+W6osCUAOTIwDMc=";
   };
 
   disabled = pythonOlder "3.7";
@@ -46,10 +48,12 @@ buildPythonPackage rec {
     jinja2
     pluggy
     pyyaml
+    packaging
     rich
     requests
     requirements-parser
     setuptools
+    snowflake-core
     snowflake-connector-python
     tomlkit
     typer

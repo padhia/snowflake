@@ -11,7 +11,8 @@
         callPackage = lib.callPackageWith pkgs.${py}.pkgs;
         snowflake-connector-python = callPackage ./snowflake-connector-python.nix {};
         snowflake-snowpark-python = callPackage ./snowflake-snowpark-python.nix { inherit snowflake-connector-python; };
-        snowflake-cli = callPackage ./snowflake-cli.nix { inherit snowflake-connector-python; };
+        snowflake-core = callPackage ./snowflake-core.nix { inherit snowflake-snowpark-python; };
+        snowflake-cli = callPackage ./snowflake-cli.nix { inherit snowflake-connector-python snowflake-core; };
       in {
         inherit snowflake-connector-python snowflake-snowpark-python snowflake-cli;
       };
