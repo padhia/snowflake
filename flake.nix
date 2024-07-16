@@ -55,7 +55,7 @@
             allPys  = lib.genAttrs pythons pyPkgs;
             allPkgs = lib.mapAttrs' (k: v: lib.nameValuePair (k + "Packages") v) allPys;
             snowsql = callPackage ./snowsql.nix {};
-            snowflake-cli = allPys.${python3}.snowflake-cli;
+            snowflake-cli = allPys.python311.snowflake-cli;
           in
             allPkgs // { inherit snowsql snowflake-cli; };
 
@@ -75,14 +75,7 @@
 
     overlays = {
       snowsql = final: prev: { snowsql = prev.callPackage ./snowsql.nix {}; };
-      snowflake-cli = final: prev:
-        let
-          python3 = defaultPython prev;
-          pyPkgs  = mkPyPkgs prev python3;
-        in {
-          snowsql = prev.callPackage ./snowsql.nix {};
-          snowflake-cli = pyPkgs.snowflake-cli;
-        };
+      snowflake-cli = final: prev: { snowflake-cli = (mkPyPkgs prev "python311").snowflake-cli; };
     };
   };
 }
