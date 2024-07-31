@@ -14,13 +14,13 @@
 
 buildPythonPackage rec {
   pname     = "snowflake-core";
-  version   = "0.8.1";
+  version   = "0.11.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_core";
     inherit version;
-    hash = "sha256-qyc6vR4+46kzYZjMLhx/HDn4ZQJvTRceRjLK3/ErLmw=";
+    hash = "sha256-Tc072/+g5Y9nGJEGpVrkRaP/0zmkRRm1Bal2kE0anr8=";
   };
 
   disabled = pythonOlder "3.7";
