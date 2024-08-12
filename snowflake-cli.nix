@@ -27,13 +27,13 @@
 
 buildPythonPackage rec {
   pname     = "snowflake-cli-labs";
-  version   = "2.6.1";
+  version   = "2.7.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_cli_labs";
     inherit version;
-    hash = "sha256-yNqkAEZtfkAbKR9B3B+ZGvzfWCspAuj1upH8PQD5vXA=";
+    hash = "sha256-EeQx3dBvMExqPKH4KfFuiJ/UqcBQaj9nqgv/a5F/+Es=";
   };
 
   disabled = pythonOlder "3.7";
