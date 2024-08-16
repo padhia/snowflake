@@ -50,7 +50,7 @@ buildPythonPackage rec {
   ];
 
   pythonRelaxDeps = [
-    "platformdirs"
+    "cryptography"
   ];
 
   propagatedBuildInputs = [
