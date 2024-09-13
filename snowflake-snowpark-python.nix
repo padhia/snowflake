@@ -14,28 +14,28 @@
 
 buildPythonPackage rec {
   pname = "snowflake-snowpark-python";
-  version = "1.21.1";
+  version = "1.22.1";
   format = "setuptools";
 
   src = fetchPypi {
     inherit version;
     pname = "snowflake_snowpark_python";
-    hash = "sha256-qZb/2paMZQaZwFrprNjeQFRmRqWY5w/jLVO7lsU1hZ0=";
+    hash = "sha256-qblvu+9h6Q5Xj4XByz1G1ZC/SmdmPQwoT2MyNOk1JkM=";
   };
 
-  disabled = pythonOlder "3.7";
+  disabled = pythonOlder "3.8";
 
   pythonRelaxDeps = [
     "cloudpickle"
   ];
 
-  propagatedBuildInputs = [
+  dependencies = [
+    cloudpickle
+    pyyaml
     setuptools
-    wheel
     snowflake-connector-python
     typing-extensions
-    pyyaml
-    cloudpickle
+    wheel
   ];
 
   doCheck = false;
