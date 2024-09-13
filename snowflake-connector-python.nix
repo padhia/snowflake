@@ -1,6 +1,5 @@
 { lib
 , buildPythonPackage
-, pythonRelaxDepsHook
 , cython
 , fetchPypi
 , pythonOlder
@@ -34,45 +33,45 @@ buildPythonPackage rec {
   version   = "3.12.2";
   pyproject = true;
 
+  disabled = pythonOlder "3.8";
+
   src = fetchPypi {
     inherit version;
     pname = "snowflake_connector_python";
     hash  = "sha256-/ZvCqxv1OE0si2W8ALsEdVV9UvBHenESkzSqtT+Wef0=";
   };
 
-  disabled = pythonOlder "3.7";
-
-  nativeBuildInputs = [
+  build-system = [
     cython
-    pythonRelaxDepsHook
     setuptools
     wheel
   ];
 
-  pythonRelaxDeps = [ ];
-
-  propagatedBuildInputs = [
+  dependencies = [
     asn1crypto
+    certifi
     cffi
+    charset-normalizer
     cryptography
-    pyopenssl
+    filelock
+    idna
+    packaging
+    platformdirs
     pyjwt
+    pyopenssl
     pytz
     requests
-    packaging
-    charset-normalizer
-    idna
-    certifi
-    typing-extensions
-    filelock
     sortedcontainers
-    platformdirs
     tomlkit
+    typing-extensions
   ];
 
   passthru.optional-dependencies = {
+    pandas = [
+      pandas
+      pyarrow
+    ];
     secure-local-storage = [ keyring ];
-    pandas = [ pandas pyarrow ];
   };
 
   # Tests require encrypted secrets, see
