@@ -6,24 +6,28 @@
 
   outputs = { self, nixpkgs, flake-utils }:
   let
+    typer-fix = py-final: py-prev: {
+      typer = py-prev.typer.overridePythonAttrs (old: rec {
+        pname = "typer";
+        version = "0.12.5";
+        src =   py-final.fetchPypi {
+          inherit pname version;
+          hash = "sha256-9ZLwib7cyOwbl0El1khRApw7GvFF8ErKZNaUEPDJtyI=";
+        };
+        doCheck = false;  # fails on darwin
+      });
+    };
+
+    pyOverlay = py-final: py-prev: {
+      snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {};
+      snowflake-core = py-final.callPackage ./snowflake-core.nix {};
+      snowflake-cli  = py-final.callPackage ./snowflake-cli.nix {};
+    };
+
     overlays.default = final: prev: {
-      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-        (
-          python-final: python-prev: {
-            typer = python-prev.typer.overridePythonAttrs (old: rec {
-              pname = "typer";
-              version = "0.12.5";
-              src =   python-final.fetchPypi {
-                inherit pname version;
-                hash = "sha256-9ZLwib7cyOwbl0El1khRApw7GvFF8ErKZNaUEPDJtyI=";
-              };
-            });
-            snowflake-snowpark-python = python-final.callPackage ./snowflake-snowpark-python.nix {};
-            snowflake-core = python-final.callPackage ./snowflake-core.nix {};
-            snowflake-cli = python-final.callPackage ./snowflake-cli.nix {};
-          }
-        )
-      ];
+      inherit (final.python311Packages) snowflake-cli;
+      snowsql = prev.callPackage ./snowsql.nix {};
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [ typer-fix pyOverlay ];
     };
 
     eachSystem = flake-utils.lib.eachDefaultSystem (system:
@@ -48,8 +52,7 @@
         };
 
         packages = {
-          snowsql = pkgs.callPackage ./snowsql.nix {};
-          snowflake-cli = pkgs.python311Packages.callPackage ./snowflake-cli.nix {};
+          inherit (pkgs) snowsql snowflake-cli;
         };
 
         apps = {
