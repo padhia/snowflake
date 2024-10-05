@@ -27,24 +27,25 @@
 
 buildPythonPackage rec {
   pname     = "snowflake-cli-labs";
-  version   = "2.8.1";
+  version   = "3.0.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_cli_labs";
     inherit version;
-    hash = "sha256-roDu1jBdWc2zFXC+69m3LcIH7VSMrwgeCZIBmCK8rUk=";
+    hash = "sha256-XzvU0tmI+2ZgPRvLotvWnqGVXNi1YALIo+JNWu9ZXTA=";
   };
 
-  disabled = pythonOlder "3.7";
+  disabled = pythonOlder "3.10";
+
   pythonRelaxDeps = true;
 
-  nativeBuildInputs = [
+  build-system = [
     pythonRelaxDepsHook
     hatchling
   ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     jinja2
     pluggy
     pyyaml

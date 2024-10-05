@@ -6,76 +6,64 @@
 
   outputs = { self, nixpkgs, flake-utils }:
   let
-    mkPyPkgs = pkgs: py: with pkgs;
-      let
-        callPackage = lib.callPackageWith pkgs.${py}.pkgs;
-        snowflake-connector-python = callPackage ./snowflake-connector-python.nix {};
-        snowflake-snowpark-python = callPackage ./snowflake-snowpark-python.nix { inherit snowflake-connector-python; };
-        snowflake-core = callPackage ./snowflake-core.nix { inherit snowflake-snowpark-python; };
-        snowflake-cli = callPackage ./snowflake-cli.nix { inherit snowflake-connector-python snowflake-core; };
-      in {
-        inherit snowflake-connector-python snowflake-snowpark-python snowflake-cli;
-      };
-
-    defaultPython = pkgs: with pkgs; lib.replaceStrings ["."] [""] python3.libPrefix;
-
-    bySystemOutputs =
-      flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs    = import nixpkgs { inherit system; config.allowUnfree = true; };
-        pythons = ["python311" "python312"];
-        python3 = defaultPython pkgs;
-
-        pyPkgs = mkPyPkgs pkgs;
-
-        devShells =
-          let
-            mkDevShell = py:
-              pkgs.mkShell {
-                name = "snowflake";
-                venvDir = "./.venv";
-                buildInputs = with pkgs.python311Packages; [
-                  python
-                  pkgs.ruff
-                  venvShellHook
-                  build
-                  pytest
-                  (pyPkgs py).snowflake-connector-python
-                  (pyPkgs py).snowflake-snowpark-python
-                ];
+    overlays.default = final: prev: {
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (
+          python-final: python-prev: {
+            typer = python-prev.typer.overridePythonAttrs (old: rec {
+              pname = "typer";
+              version = "0.12.5";
+              src =   python-final.fetchPypi {
+                inherit pname version;
+                hash = "sha256-9ZLwib7cyOwbl0El1khRApw7GvFF8ErKZNaUEPDJtyI=";
               };
+            });
+            snowflake-snowpark-python = python-final.callPackage ./snowflake-snowpark-python.nix {};
+            snowflake-core = python-final.callPackage ./snowflake-core.nix {};
+            snowflake-cli = python-final.callPackage ./snowflake-cli.nix {};
+          }
+        )
+      ];
+    };
 
-            allPys = pkgs.lib.genAttrs pythons mkDevShell;
+    eachSystem = flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = [ self.overlays.default ];
+        };
 
-          in
-            allPys // { default = allPys.${python3}; };
+        devShells.default = pkgs.mkShell {
+          name = "snowflake";
+          venvDir = "./.venv";
+          buildInputs = with pkgs.python311Packages; [
+            python311
+            pkgs.ruff
+            venvShellHook
+            build
+            pytest
+            snowflake-snowpark-python
+          ];
+        };
 
-        packages = with pkgs;
-          let
-            allPys  = lib.genAttrs pythons pyPkgs;
-            allPkgs = lib.mapAttrs' (k: v: lib.nameValuePair (k + "Packages") v) allPys;
-            snowsql = callPackage ./snowsql.nix {};
-            snowflake-cli = allPys.python311.snowflake-cli;
-          in
-            allPkgs // { inherit snowsql snowflake-cli; };
+        packages = {
+          snowsql = pkgs.callPackage ./snowsql.nix {};
+          snowflake-cli = pkgs.python311Packages.callPackage ./snowflake-cli.nix {};
+        };
 
         apps = {
           snowsql.type    = "app";
           snowsql.program = "${packages.snowsql}/bin/snowsql";
-          snow.type       = "app";
-          snow.program    = "${packages.snowflake-cli}/bin/snow";
+          default.type    = "app";
+          default.program = "${packages.snowflake-cli}/bin/snow";
         };
 
       in {
         inherit devShells packages apps;
       });
-
   in {
-    inherit (bySystemOutputs) devShells packages apps;
-
-    overlays = {
-      snowsql = final: prev: { snowsql = prev.callPackage ./snowsql.nix {}; };
-      snowflake-cli = final: prev: { snowflake-cli = (mkPyPkgs prev "python311").snowflake-cli; };
-    };
+    inherit (eachSystem) devShells packages apps;
+    inherit overlays;
   };
 }
