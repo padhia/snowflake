@@ -38,28 +38,32 @@
           overlays = [ self.overlays.default ];
         };
 
-        devShells.default = pkgs.mkShell {
-          name = "snowflake";
-          venvDir = "./.venv";
-          buildInputs = with pkgs.python311Packages; [
-            python311
-            pkgs.ruff
-            venvShellHook
-            build
-            pytest
-            snowflake-snowpark-python
-          ];
-        };
+        devShells =
+          let
+            mkEnv = pyPkgs: name: pkgs.mkShell {
+              inherit name;
+              venvDir = "./.venv";
+              buildInputs = with pyPkgs; [
+                python
+                pkgs.ruff
+                venvShellHook
+                build
+                pytest
+                pyPkgs.${"snowflake-${name}-python"}
+              ];
+            };
+          in {
+            default = mkEnv pkgs.python311Packages "snowpark";
+            connector = mkEnv pkgs.python3Packages "connector";
+          };
 
         packages = {
           inherit (pkgs) snowsql snowflake-cli;
         };
 
         apps = {
-          snowsql.type    = "app";
-          snowsql.program = "${packages.snowsql}/bin/snowsql";
-          default.type    = "app";
-          default.program = "${packages.snowflake-cli}/bin/snow";
+          snowsql = { type = "app"; program = "${packages.snowsql}/bin/snowsql"; };
+          default = { type = "app"; program = "${packages.snowflake-cli}/bin/snow"; };
         };
 
       in {
