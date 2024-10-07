@@ -7,7 +7,7 @@
   outputs = { self, nixpkgs, flake-utils }:
   let
     typer-fix = py-final: py-prev: {
-      typer = py-prev.typer.overridePythonAttrs (old: rec {
+      typer125 = py-prev.typer.overridePythonAttrs (old: rec {
         pname = "typer";
         version = "0.12.5";
         src =   py-final.fetchPypi {
@@ -21,7 +21,7 @@
     pyOverlay = py-final: py-prev: {
       snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {};
       snowflake-core = py-final.callPackage ./snowflake-core.nix {};
-      snowflake-cli  = py-final.callPackage ./snowflake-cli.nix {};
+      snowflake-cli  = py-final.callPackage ./snowflake-cli.nix { typer = py-final.typer125; };
     };
 
     overlays.default = final: prev: {
