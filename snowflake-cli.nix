@@ -1,7 +1,7 @@
 { lib
 , buildPythonPackage
-, pythonRelaxDepsHook
-, fetchPypi
+, hatch-vcs
+, fetchFromGitHub
 , pythonOlder
 , hatchling
 
@@ -26,14 +26,15 @@
 }:
 
 buildPythonPackage rec {
-  pname     = "snowflake-cli";
-  version   = "3.1.0";
+  pname = "snowflake-cli";
+  version = "3.2.0";
   pyproject = true;
 
-  src = fetchPypi {
-    pname = "snowflake_cli";
-    inherit version;
-    hash = "sha256-iMtvrOV6qO3/1LNaESZxrCBtvxz27uTuqg8ehWdsyWk=";
+  src = fetchFromGitHub {
+    owner = "snowflakedb";
+    repo = "snowflake-cli";
+    rev = "refs/tags/v${version}";
+    hash = "sha256-fe319oxOEqekJU05e/w3esQ2HT1vWTKBpTiUZpSiqdg=";
   };
 
   disabled = pythonOlder "3.10";
@@ -41,8 +42,9 @@ buildPythonPackage rec {
   pythonRelaxDeps = true;
 
   build-system = [
-    pythonRelaxDepsHook
+    hatch-vcs
     hatchling
+    pip
   ];
 
   dependencies = [
@@ -68,10 +70,11 @@ buildPythonPackage rec {
   doCheck = false;
 
   meta = with lib; {
-    changelog   = "https://github.com/snowflakedb/snowflake-cli/blob/main/RELEASE-NOTES.md";
+    changelog = "https://github.com/snowflakedb/snowflake-cli/blob/main/RELEASE-NOTES.md";
     description = "Snowflake Developer CLI";
-    homepage    = "https://github.com/snowflakedb/snowflake-cli";
-    license     = licenses.asl20;
-    maintainers = with maintainers; [ ];
+    homepage = "https://github.com/snowflakedb/snowflake-cli";
+    license = licenses.asl20;
+    maintainers = with maintainers; [ padhia ];
+    mainProgram = "snow";
   };
 }
