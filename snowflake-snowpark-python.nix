@@ -2,25 +2,26 @@
 , buildPythonPackage
 , fetchPypi
 , pythonOlder
-, pythonRelaxDepsHook
 
+, cloudpickle
+, protobuf
+, python-dateutil
+, pyyaml
 , setuptools
-, wheel
 , snowflake-connector-python
 , typing-extensions
-, pyyaml
-, cloudpickle
+, wheel
 }:
 
 buildPythonPackage rec {
   pname = "snowflake-snowpark-python";
-  version = "1.23.0";
+  version = "1.25.0";
   format = "setuptools";
 
   src = fetchPypi {
     inherit version;
     pname = "snowflake_snowpark_python";
-    hash = "sha256-R/ZJrTpzmd3TvHFPpC2YRc7L0mADkyDEBuVHG+szSjU=";
+    hash = "sha256-GEufaHO0wxivJyfHBwAJmMn24kVCA25TbYbC4xRUnkc=";
   };
 
   disabled = pythonOlder "3.8";
@@ -31,6 +32,8 @@ buildPythonPackage rec {
 
   dependencies = [
     cloudpickle
+    protobuf
+    python-dateutil
     pyyaml
     setuptools
     snowflake-connector-python
