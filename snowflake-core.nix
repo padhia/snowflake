@@ -8,19 +8,21 @@
 , atpublic
 , pydantic
 , python-dateutil
+, pyyaml
+, requests
 , snowflake-snowpark-python
 , urllib3
 }:
 
 buildPythonPackage rec {
   pname     = "snowflake-core";
-  version   = "0.12.1";
+  version   = "1.0.2";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_core";
     inherit version;
-    hash = "sha256-4s6fI1gP2nm6TRT7Nkb08Ju1+kfvSItmCV5ILkrEVlY=";
+    hash = "sha256-i/Jn/x780X8VdDLG4k9tLrbCru1m9DqzSyFap22O3wI=";
   };
 
   disabled = pythonOlder "3.7";
@@ -35,6 +37,8 @@ buildPythonPackage rec {
     atpublic
     pydantic
     python-dateutil
+    pyyaml
+    requests
     snowflake-snowpark-python
     urllib3
   ];
