@@ -2,6 +2,8 @@
 , buildPythonPackage
 , fetchPypi
 , pythonOlder
+, mypy-protobuf
+, protoc-wheel-0
 
 , cloudpickle
 , protobuf
@@ -10,24 +12,31 @@
 , setuptools
 , snowflake-connector-python
 , typing-extensions
+, tzlocal
 , wheel
 }:
 
 buildPythonPackage rec {
   pname = "snowflake-snowpark-python";
-  version = "1.25.0";
-  format = "setuptools";
+  version = "1.28.0";
+  pyproject = true;
 
   src = fetchPypi {
     inherit version;
     pname = "snowflake_snowpark_python";
-    hash = "sha256-GEufaHO0wxivJyfHBwAJmMn24kVCA25TbYbC4xRUnkc=";
+    hash = "sha256-ijn9xg/nOwTd3EiJq1rVqDZaQmtmxKYaZkQzAfXTtCI=";
   };
 
   disabled = pythonOlder "3.8";
 
   pythonRelaxDeps = [
     "cloudpickle"
+  ];
+
+  build-system = [
+    setuptools
+    mypy-protobuf
+    protoc-wheel-0
   ];
 
   dependencies = [
@@ -38,6 +47,7 @@ buildPythonPackage rec {
     setuptools
     snowflake-connector-python
     typing-extensions
+    tzlocal
     wheel
   ];
 
