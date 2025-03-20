@@ -7,6 +7,18 @@
   outputs = { self, nixpkgs, flake-utils }:
   let
     pyOverlay = py-final: py-prev: {
+      snowflake-connector-python = py-prev.snowflake-connector-python.overridePythonAttrs(old: rec {
+        version = "3.14.0";
+
+        src = py-final.pkgs.fetchFromGitHub {
+          owner = "snowflakedb";
+          repo  = "snowflake-connector-python";
+          tag   = "v${version}";
+          hash  = "sha256-r3g+eVVyK9t5qpAGvimapuWilAh3eHJEFUw8VBwtKw8=";
+        };
+
+        doCheck = false;
+      });
       protoc-wheel-0 = py-final.callPackage ./protoc-wheel-0.nix {};
       snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {};
       snowflake-core = py-final.callPackage ./snowflake-core.nix {};
@@ -14,7 +26,7 @@
     };
 
     overlays.default = final: prev: {
-      inherit (final.python311Packages) snowflake-cli;
+      inherit (final.python3Packages) snowflake-cli;
       snowsql = prev.callPackage ./snowsql.nix {};
       pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [ pyOverlay ];
     };
@@ -34,6 +46,7 @@
               venvDir = "./.venv";
               buildInputs = with pyPkgs; [
                 python
+                pip
                 pkgs.ruff
                 venvShellHook
                 build
@@ -42,7 +55,7 @@
               ];
             };
           in {
-            default = mkEnv pkgs.python311Packages "snowpark";
+            default = mkEnv pkgs.python3Packages "snowpark";
             connector = mkEnv pkgs.python3Packages "connector";
           };
 
