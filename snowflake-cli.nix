@@ -5,36 +5,36 @@
 , pythonOlder
 , hatchling
 
+, gitpython
 , jinja2
-, pluggy
-, pyyaml
 , packaging
-, rich
+, pip
+, pluggy
+, pydantic
+, pyyaml
 , requests
 , requirements-parser
+, rich
 , setuptools
-, snowflake-core
 , snowflake-connector-python
+, snowflake-core
 , tomlkit
 , typer
 , urllib3
-, gitpython
-, pip
-, pydantic
 
 , keyring
 }:
 
 buildPythonPackage rec {
   pname = "snowflake-cli";
-  version = "3.5.0";
+  version = "3.6.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "snowflakedb";
     repo = "snowflake-cli";
     rev = "refs/tags/v${version}";
-    hash = "sha256-iEvgvz6EBPzfOLe60QQi1S3FIyFWYFVn8slWEpIusAI=";
+    hash = "sha256-ti8KqiIyDjjnfzdbpfzOwR3sqBYDkNlUylCzovwLKU8=";
   };
 
   disabled = pythonOlder "3.10";
@@ -48,22 +48,22 @@ buildPythonPackage rec {
   ];
 
   dependencies = [
+    gitpython
     jinja2
-    pluggy
-    pyyaml
     packaging
-    rich
+    pip
+    pluggy
+    pydantic
+    pyyaml
     requests
     requirements-parser
+    rich
     setuptools
-    snowflake-core
     snowflake-connector-python
+    snowflake-core
     tomlkit
     typer
     urllib3
-    gitpython
-    pip
-    pydantic
     keyring
   ];
 
