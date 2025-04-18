@@ -11,7 +11,7 @@
 , cloudpickle
 , cryptography
 , fsspec
-, importlib_resources
+, importlib-resources
 , numpy
 , packaging
 , pandas
@@ -39,7 +39,7 @@ buildPythonPackage rec {
   src = fetchPypi {
     pname = "snowflake_ml_python";
     inherit version;
-    hash = "";
+    hash = "sha256-TgvdHeoYZQvQKwG/wGfzxqvdxslK0sP+V8W2NcGUzsQ=";
   };
 
   disabled = pythonOlder "3.9";
@@ -57,7 +57,7 @@ buildPythonPackage rec {
     cloudpickle
     cryptography
     fsspec
-    importlib_resources
+    importlib-resources
     numpy
     packaging
     pandas

@@ -22,7 +22,7 @@
       protoc-wheel-0 = py-final.callPackage ./protoc-wheel-0.nix {};
       snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {};
       snowflake-core = py-final.callPackage ./snowflake-core.nix {};
-      snowflake-cli  = py-final.callPackage ./snowflake-cli.nix {};
+      snowflake-cli = py-final.callPackage ./snowflake-cli.nix {};
       snowflake-ml-python = py-final.callPackage ./snowflake-ml-python.nix {};
     };
 
