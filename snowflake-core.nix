@@ -5,7 +5,6 @@
 , pythonOlder
 , hatchling
 
-, atpublic
 , pydantic
 , python-dateutil
 , pyyaml
@@ -16,13 +15,13 @@
 
 buildPythonPackage rec {
   pname     = "snowflake-core";
-  version   = "1.1.0";
+  version   = "1.3.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_core";
     inherit version;
-    hash = "sha256-YgoOQCYYXzngJaPbnsYkDY+RsU1zeJHqneP2gSJEce0=";
+    hash = "sha256-0N/HFiXKt1kfO9+UhTUADcOMjKFNV3xkCHXnYjrPfuY=";
   };
 
   disabled = pythonOlder "3.9";
@@ -34,7 +33,6 @@ buildPythonPackage rec {
   ];
 
   propagatedBuildInputs = [
-    atpublic
     pydantic
     python-dateutil
     pyyaml
