@@ -27,12 +27,12 @@ buildPythonPackage rec {
   disabled = pythonOlder "3.9";
   pythonRelaxDeps = true;
 
-  nativeBuildInputs = [
+  build-system = [
     pythonRelaxDepsHook
     hatchling
   ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     pydantic
     python-dateutil
     pyyaml
