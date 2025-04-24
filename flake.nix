@@ -19,6 +19,7 @@
 
         doCheck = false;
       });
+      snowflake-sqlalchemy = py-final.callPackage ./snowflake-sqlalchemy.nix {};
       protoc-wheel-0 = py-final.callPackage ./protoc-wheel-0.nix {};
       snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {};
       snowflake-core = py-final.callPackage ./snowflake-core.nix {};
