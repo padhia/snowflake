@@ -9,19 +9,19 @@
 , python-dateutil
 , pyyaml
 , requests
-, snowflake-snowpark-python
+, snowflake-connector-python
 , urllib3
 }:
 
 buildPythonPackage rec {
   pname     = "snowflake-core";
-  version   = "1.3.0";
+  version   = "1.4.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_core";
     inherit version;
-    hash = "sha256-0N/HFiXKt1kfO9+UhTUADcOMjKFNV3xkCHXnYjrPfuY=";
+    hash = "sha256-3BzO3s5BtS/cuF+JwKuAG8Usca5oo79ffp33TXUP5E8=";
   };
 
   disabled = pythonOlder "3.9";
@@ -37,7 +37,7 @@ buildPythonPackage rec {
     python-dateutil
     pyyaml
     requests
-    snowflake-snowpark-python
+    snowflake-connector-python
     urllib3
   ];
 
