@@ -7,19 +7,7 @@
   outputs = { self, nixpkgs, flake-utils }:
   let
     pyOverlay = py-final: py-prev: {
-      snowflake-connector-python = py-prev.snowflake-connector-python.overridePythonAttrs(old: rec {
-        version = "3.14.0";
-
-        src = py-final.pkgs.fetchFromGitHub {
-          owner = "snowflakedb";
-          repo  = "snowflake-connector-python";
-          tag   = "v${version}";
-          hash  = "sha256-r3g+eVVyK9t5qpAGvimapuWilAh3eHJEFUw8VBwtKw8=";
-        };
-
-        doCheck = false;
-      });
-      snowflake-sqlalchemy = py-final.callPackage ./snowflake-sqlalchemy.nix {};
+      snowflake-connector-python = py-final.callPackage ./snowflake-connector-python.nix {};
       protoc-wheel-0 = py-final.callPackage ./protoc-wheel-0.nix {};
       snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {};
       snowflake-core = py-final.callPackage ./snowflake-core.nix {};
