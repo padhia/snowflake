@@ -7,6 +7,7 @@
   outputs = { self, nixpkgs, flake-utils }:
   let
     pyOverlay = py-final: py-prev: {
+      protobuf = py-final.protobuf5;
       snowflake-connector-python = py-final.callPackage ./snowflake-connector-python.nix {};
       protoc-wheel-0 = py-final.callPackage ./protoc-wheel-0.nix {};
       snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {};
