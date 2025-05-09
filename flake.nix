@@ -6,11 +6,14 @@
 
   outputs = { self, nixpkgs, flake-utils }:
   let
-    pyOverlay = py-final: py-prev: {
-      protobuf = py-final.protobuf5;
+    pyOverlay = py-final: py-prev: rec {
+      grpcio5 = py-prev.grpcio.override { protobuf = py-final.protobuf5; };
+      grpcio-tools5 = py-prev.grpcio-tools.override { grpcio = grpcio5; protobuf = py-final.protobuf5; };
+      mypy-protobuf5 = py-prev.mypy-protobuf.override { protobuf = py-final.protobuf5; grpcio-tools = grpcio-tools5; };
+
       snowflake-connector-python = py-final.callPackage ./snowflake-connector-python.nix {};
       protoc-wheel-0 = py-final.callPackage ./protoc-wheel-0.nix {};
-      snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {};
+      snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix { protobuf = py-final.protobuf5; mypy-protobuf = mypy-protobuf5; };
       snowflake-core = py-final.callPackage ./snowflake-core.nix {};
       snowflake-cli = py-final.callPackage ./snowflake-cli.nix {};
       snowflake-ml-python = py-final.callPackage ./snowflake-ml-python.nix {};
