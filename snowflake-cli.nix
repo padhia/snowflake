@@ -5,11 +5,13 @@
 , pythonOlder
 , hatchling
 
+, click
 , gitpython
 , jinja2
 , packaging
 , pip
 , pluggy
+, prompt-toolkit
 , pydantic
 , pyyaml
 , requests
@@ -27,14 +29,14 @@
 
 buildPythonPackage rec {
   pname = "snowflake-cli";
-  version = "3.7.0";
+  version = "3.8.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "snowflakedb";
     repo = "snowflake-cli";
     rev = "refs/tags/v${version}";
-    hash = "sha256-FrPmxVIORCeGMOl3uNuEiOt3w72LpNNSZp+x1a/hLq0=";
+    hash = "sha256-Zao64L5vJQhjwBj9AnuTVmj77xs755mb04iKKrBiCtk=";
   };
 
   disabled = pythonOlder "3.10";
@@ -48,11 +50,13 @@ buildPythonPackage rec {
   ];
 
   dependencies = [
+    click
     gitpython
     jinja2
     packaging
     pip
     pluggy
+    prompt-toolkit
     pydantic
     pyyaml
     requests
