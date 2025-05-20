@@ -29,14 +29,14 @@
 
 buildPythonPackage rec {
   pname = "snowflake-cli";
-  version = "3.8.0";
+  version = "3.8.1";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "snowflakedb";
     repo = "snowflake-cli";
     rev = "refs/tags/v${version}";
-    hash = "sha256-Zao64L5vJQhjwBj9AnuTVmj77xs755mb04iKKrBiCtk=";
+    hash = "sha256-qAh9oPx84uiJnAL9PgLLDR/SQVgZtG8xKPSZhW0fxd8=";
   };
 
   disabled = pythonOlder "3.10";
