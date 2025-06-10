@@ -16,6 +16,7 @@
 , packaging
 , pandas
 , pyarrow
+, pydantic
 , pyjwt
 , pytimeparse
 , pyyaml
@@ -23,9 +24,10 @@
 , s3fs
 , scikit-learn
 , scipy
+, shap
 , snowflake-connector-python
-, snowflake-snowpark-python
 , snowflake-core
+, snowflake-snowpark-python
 , sqlparse
 , typing-extensions
 , xgboost
@@ -33,13 +35,13 @@
 
 buildPythonPackage rec {
   pname     = "snowflake-core";
-  version   = "1.8.2";
+  version   = "1.8.5";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_ml_python";
     inherit version;
-    hash = "sha256-TgvdHeoYZQvQKwG/wGfzxqvdxslK0sP+V8W2NcGUzsQ=";
+    hash = "sha256-wC4C4HHcoDuxg66uOXqqgLMF3katCMkxsLgz403ST4c=";
   };
 
   disabled = pythonOlder "3.9";
@@ -62,6 +64,7 @@ buildPythonPackage rec {
     packaging
     pandas
     pyarrow
+    pydantic
     pyjwt
     pytimeparse
     pyyaml
@@ -69,6 +72,7 @@ buildPythonPackage rec {
     s3fs
     scikit-learn
     scipy
+    shap
     snowflake-connector-python
     snowflake-snowpark-python
     snowflake-core
