@@ -8,9 +8,10 @@ This flake provides Snowflake applications, packages, development shells and an 
 
 ## Python Packages
 - `snowflake-snowpark-python`
-- `snowpark-ml-python`
+- `snowpark-ml-python` (Note: current version does not work due to numpy<2 requirement)
 - `snowpark-core`
-- `snowflake-connector-python` Note: Since this package is already available in `nixpkgs`, it will be included when the `nixpkgs` version is too old to build other packages
+- `snowflake-connector-python` (Note: only available if version in `nixos-unstable` is outdated)
+- `snowflake-sqlalchemy` (Note: only available if version in `nixos-unstable` is outdated)
 
 ## Development shells
 

@@ -20,6 +20,16 @@
         protobuf = py-final.protobuf5;
         mypy-protobuf = mypy-protobuf5;
       };
+
+      snowflake-sqlalchemy = py-prev.snowflake-sqlalchemy.overridePythonAttrs(old: rec {
+        version = "1.7.4";
+        src = py-final.pkgs.fetchFromGitHub {
+          owner = "snowflakedb";
+          repo  = "snowflake-sqlalchemy";
+          tag   = "v${version}";
+          hash  = "sha256-Twv8ugLrQT9y4wHNo0B8vkWOFNSci/t4eY9XvFlq/TE=";
+        };
+      });
     };
 
     overlays.default = final: prev: {
