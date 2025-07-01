@@ -62,9 +62,9 @@
               ];
             };
           in {
-            default = mkEnv pkgs.python3Packages "snowpark";
+            default = mkEnv pkgs.python312Packages "snowpark";
             connector = mkEnv pkgs.python3Packages "connector";
-            ml = mkEnv pkgs.python3Packages "ml";
+            ml = mkEnv pkgs.python312Packages "ml";
           };
 
         packages = {

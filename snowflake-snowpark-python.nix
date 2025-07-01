@@ -2,6 +2,7 @@
 , buildPythonPackage
 , fetchPypi
 , pythonOlder
+, pythonAtLeast
 , mypy-protobuf
 , protoc-wheel-0
 
@@ -27,7 +28,7 @@ buildPythonPackage rec {
     hash = "sha256-cusHT1yvKqEpNCp7s11fRSVon+4+cgZN+EO3E4WeVyA=";
   };
 
-  disabled = pythonOlder "3.9";
+  disabled = pythonOlder "3.9" || pythonAtLeast "3.13";
 
   pythonRelaxDeps = [
     "cloudpickle"
