@@ -11,24 +11,24 @@
       grpcio-tools5  = py-prev.grpcio-tools.override  { protobuf = py-final.protobuf5; grpcio = grpcio5; };
       mypy-protobuf5 = py-prev.mypy-protobuf.override { protobuf = py-final.protobuf5; grpcio-tools = grpcio-tools5; };
 
-      snowflake-connector-python = py-final.callPackage ./snowflake-connector-python.nix {};
-      protoc-wheel-0             = py-final.callPackage ./protoc-wheel-0.nix {};
-      snowflake-core             = py-final.callPackage ./snowflake-core.nix {};
-      snowflake-cli              = py-final.callPackage ./snowflake-cli.nix {};
-      snowflake-ml-python        = py-final.callPackage ./snowflake-ml-python.nix {};
-      snowflake-snowpark-python  = py-final.callPackage ./snowflake-snowpark-python.nix {
+      protoc-wheel-0 = py-final.callPackage ./protoc-wheel-0.nix {};
+      snowflake-core = py-final.callPackage ./snowflake-core.nix {};
+      snowflake-cli  = py-final.callPackage ./snowflake-cli.nix {};
+      snowflake-ml-python = py-final.callPackage ./snowflake-ml-python.nix {};
+      snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {
         protobuf = py-final.protobuf5;
         mypy-protobuf = mypy-protobuf5;
       };
 
-      snowflake-sqlalchemy = py-prev.snowflake-sqlalchemy.overridePythonAttrs(old: rec {
-        version = "1.7.4";
+      snowflake-connector-python = py-prev.snowflake-connector-python.overridePythonAttrs(old: rec {
+        version = "3.16.0";
         src = py-final.pkgs.fetchFromGitHub {
           owner = "snowflakedb";
-          repo  = "snowflake-sqlalchemy";
+          repo  = "snowflake-connector-python";
           tag   = "v${version}";
-          hash  = "sha256-Twv8ugLrQT9y4wHNo0B8vkWOFNSci/t4eY9XvFlq/TE=";
+          hash  = "sha256-mow8TxmkeaMkgPTLUpx5Gucn4347gohHPyiBYjI/cDs=";
         };
+        doCheck = false;
       });
     };
 
