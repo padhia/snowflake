@@ -33,7 +33,7 @@
     };
 
     overlays.default = final: prev: {
-      inherit (final.python3Packages) snowflake-cli;
+      inherit (final.python312Packages) snowflake-cli;
       snowsql = prev.callPackage ./snowsql.nix {};
       pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [ pyOverlay ];
     };
