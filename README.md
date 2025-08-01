@@ -10,7 +10,7 @@ This flake provides Snowflake applications, packages, development shells and an 
 ## Python Packages
 
 - `snowflake-snowpark-python`
-- `snowpark-ml-python` (Note: current version does not work due to [`numpy<2` requirement](https://github.com/snowflakedb/snowflake-ml-python/issues/160))
+- `snowpark-ml-python`
 - `snowpark-core` (\*)
 - `snowflake-connector-python` (\*)
 - `snowflake-sqlalchemy` (\*)
