@@ -23,21 +23,21 @@
       };
 
       snowflake-core = py-prev.snowflake-core.overridePythonAttrs(old: rec {
-        version = "1.6.0";
+        version = "1.7.0";
         src = py-final.pkgs.fetchPypi {
           pname = "snowflake_core";
           inherit version;
-          hash = "sha256-W6itmcyJRdSAlTLxj2asYjrqGIjmhpdcRh+Gp8OXAik=";
+          hash = "sha256-hlWpTCEa4E0dgD28h2JJ3m0/gCHMVzjWia6oQtG2an8=";
         };
       });
 
       snowflake-connector-python = py-prev.snowflake-connector-python.overridePythonAttrs(old: rec {
-        version = "3.16.0";
+        version = "3.17.0";
         src = py-final.pkgs.fetchFromGitHub {
           owner = "snowflakedb";
           repo  = "snowflake-connector-python";
           tag   = "v${version}";
-          hash  = "sha256-mow8TxmkeaMkgPTLUpx5Gucn4347gohHPyiBYjI/cDs=";
+          hash  = "sha256-LXux1imRJQurfwMss7Fjp7/VlGO9Uj5FjBC4txnVvt8=";
         };
         doCheck = false;
       });
