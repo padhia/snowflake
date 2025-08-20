@@ -6,21 +6,11 @@
 
   outputs = { self, nixpkgs, flake-utils }:
   let
-    grpcio5 = py-final: py-prev: rec {
-      grpcio5        = py-prev.grpcio.override        { protobuf = py-final.protobuf5; };
-      grpcio-tools5  = py-prev.grpcio-tools.override  { protobuf = py-final.protobuf5; grpcio = grpcio5; };
-      mypy-protobuf5 = py-prev.mypy-protobuf.override { protobuf = py-final.protobuf5; grpcio-tools = grpcio-tools5; };
-      streamlit5     = py-prev.streamlit.override     { protobuf = py-final.protobuf5; };
-    };
-
     pyOverlay = py-final: py-prev: {
       protoc-wheel-0 = py-final.callPackage ./protoc-wheel-0.nix {};
       snowflake-cli  = py-final.callPackage ./snowflake-cli.nix {};
       snowflake-ml-python = py-final.callPackage ./snowflake-ml-python.nix {};
-      snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {
-        protobuf = py-final.protobuf5;
-        mypy-protobuf = py-final.mypy-protobuf5;
-      };
+      snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {};
 
       snowflake-core = py-prev.snowflake-core.overridePythonAttrs(old: rec {
         version = "1.7.0";
@@ -46,7 +36,7 @@
     overlays.default = final: prev: {
       inherit (final.python312Packages) snowflake-cli;
       snowsql = prev.callPackage ./snowsql.nix {};
-      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [ grpcio5 pyOverlay ];
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [ pyOverlay ];
     };
 
     eachSystem = flake-utils.lib.eachDefaultSystem (system:
@@ -77,8 +67,8 @@
           in {
             default = py313Shell "snowflake" [ "snowflake-connector-python" ];
             lab = py313Shell "snowflake-lab" [ "snowflake-connector-python" "jupyterlab" "streamlit" ];
-            snowpark = py312Shell "snowpark" [ "snowflake-snowpark-python" ];
-            snowpark313 = py313Shell "snowpark" [ "snowflake-snowpark-python" ];
+            snowpark312 = py312Shell "snowpark" [ "snowflake-snowpark-python" ];
+            snowpark = py313Shell "snowpark" [ "snowflake-snowpark-python" ];
             snowpark-lab = py313Shell "snowpark-lab" [ "snowflake-snowpark-python" "jupyterlab" "streamlit" ];
             ml = py312Shell "ml" [ "snowflake-ml-python" ];
             ml-lab = py312Shell "ml-lab" [ "snowflake-ml-python" "jupyterlab" ];
