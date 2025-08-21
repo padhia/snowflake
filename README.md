@@ -24,8 +24,8 @@ Following `devShells` provide Python development environments that include menti
 name           | Python | Packages
 ---------------|--------|--------------------------------------------------------
 `default`      | 3.13   | `snowflake-connector-python`
-`snowpark`     | 3.12   | `snowflake-snowpark-python`
-`snowpark313`  | 3.13   | `snowflake-snowpark-python`
+`snowpark`     | 3.13   | `snowflake-snowpark-python`
+`snowpark312`  | 3.12   | `snowflake-snowpark-python`
 `lab`          | 3.13   | `snowflake-connector-python`, `jupyterlab`, `streamlit`
 `snowpark-lab` | 3.13   | `snowflake-snowpark-python`, `jupyterlab`, `streamlit`
 `ml`           | 3.12   | `snowflake-ml-python`
