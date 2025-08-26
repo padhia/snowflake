@@ -65,8 +65,8 @@
             py313Shell = pyShell pkgs.python313Packages;
 
           in {
-            default = py313Shell "snowflake" [ "snowflake-connector-python" ];
-            lab = py313Shell "snowflake-lab" [ "snowflake-connector-python" "jupyterlab" "streamlit" ];
+            default = py313Shell "snowflake" [ "snowflake-connector-python" "keyring" ];
+            lab = py313Shell "snowflake-lab" [ "snowflake-connector-python" "keyring" "jupyterlab" "streamlit" ];
             snowpark312 = py312Shell "snowpark" [ "snowflake-snowpark-python" ];
             snowpark = py313Shell "snowpark" [ "snowflake-snowpark-python" ];
             snowpark-lab = py313Shell "snowpark-lab" [ "snowflake-snowpark-python" "jupyterlab" "streamlit" ];

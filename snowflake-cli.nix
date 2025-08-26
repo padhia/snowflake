@@ -5,15 +5,10 @@
 , pythonOlder
 , hatchling
 
-, cfgv
 , click
-, faker
 , gitpython
-, identify
-, iniconfig
+, id
 , jinja2
-, keyring
-, nodeenv
 , packaging
 , pip
 , pluggy
@@ -29,20 +24,18 @@
 , tomlkit
 , typer
 , urllib3
-, virtualenv
-, werkzeug
 }:
 
 buildPythonPackage rec {
   pname = "snowflake-cli";
-  version = "3.10.0";
+  version = "3.11.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "snowflakedb";
     repo = "snowflake-cli";
     rev = "refs/tags/v${version}";
-    hash = "sha256-tiDXcocNKV8av7fciFz0kyS4F66heaLuREJtjwwF2m4=";
+    hash = "sha256-dJc5q3vE1G6oJq9V4JSPaSyODxKDyhprIwBo39Nu/bA=";
   };
 
   disabled = pythonOlder "3.10";
@@ -56,15 +49,10 @@ buildPythonPackage rec {
   ];
 
   dependencies = [
-    cfgv
     click
-    faker
     gitpython
-    identify
-    iniconfig
+    id
     jinja2
-    keyring
-    nodeenv
     packaging
     pip
     pluggy
@@ -80,9 +68,7 @@ buildPythonPackage rec {
     tomlkit
     typer
     urllib3
-    virtualenv
-    werkzeug
-  ];
+  ] ++ snowflake-connector-python.optional-dependencies.secure-local-storage;
 
   doCheck = false;
   dontUsePytestCheck = true; # https://discourse.nixos.org/t/disable-python-testing-in-flake/46381/6
