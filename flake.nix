@@ -22,12 +22,12 @@
       });
 
       snowflake-connector-python = py-prev.snowflake-connector-python.overridePythonAttrs(old: rec {
-        version = "3.17.2";
+        version = "3.17.3";
         src = py-final.pkgs.fetchFromGitHub {
           owner = "snowflakedb";
           repo  = "snowflake-connector-python";
           tag   = "v${version}";
-          hash  = "sha256-V7+5HARCt7A1bF/L8lxjkkTz06ZG1zFWMZWM1jW8MGQ=";
+          hash  = "sha256-fvVYL9NUe/01Q22KETWZpOig9zyk2iF9n0beI/hqFIM=";
         };
         doCheck = false;
       });
