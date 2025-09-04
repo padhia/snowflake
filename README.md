@@ -10,12 +10,13 @@ This flake provides Snowflake applications, packages, development shells and an 
 ## Python Packages
 
 - `snowflake-snowpark-python`
-- `snowpark-ml-python`
-- `snowpark-core` (\*)
-- `snowflake-connector-python` (\*)
-- `snowflake-sqlalchemy` (\*)
+- `snowpark-core` (1)
+- `snowflake-connector-python` (1)
+- `snowflake-sqlalchemy` (1)
+- `snowpark-ml-python` (2)
 
-**\*** only available if the latest version of the package in `nixos-unstable` is outdated
+1. Only available if the latest version of the package in `nixos-unstable` is outdated
+2. Frequently broken due to not supporting more recent versions of dependencies available in `nixpkgs`
 
 ## Development shells
 
