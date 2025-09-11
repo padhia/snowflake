@@ -32,6 +32,7 @@ buildPythonPackage rec {
 
   pythonRelaxDeps = [
     "cloudpickle"
+    "protobuf"
   ];
 
   build-system = [
