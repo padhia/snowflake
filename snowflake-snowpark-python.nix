@@ -53,6 +53,10 @@ buildPythonPackage rec {
     wheel
   ];
 
+  optional-dependencies = {
+    "pandas" = [ snowflake-connector-python.optional-dependencies.pandas ];
+  };
+
   doCheck = false;
 
   pythonImportsCheck = [

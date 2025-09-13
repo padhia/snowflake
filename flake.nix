@@ -11,6 +11,7 @@
       snowflake-cli  = py-final.callPackage ./snowflake-cli.nix {};
       snowflake-ml-python = py-final.callPackage ./snowflake-ml-python.nix {};
       snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {};
+      snowpark-connect = py-final.callPackage ./snowpark-connect.nix {};
 
       snowflake-core = py-prev.snowflake-core.overridePythonAttrs(old: rec {
         version = "1.7.0";
@@ -72,6 +73,21 @@
             snowpark-lab = py313Shell "snowpark-lab" [ "snowflake-snowpark-python" "jupyterlab" "streamlit" ];
             ml = py312Shell "ml" [ "snowflake-ml-python" ];
             ml-lab = py312Shell "ml-lab" [ "snowflake-ml-python" "jupyterlab" ];
+
+            snowpark-connect = pkgs.mkShell {
+              name = "snowpark-connect";
+              venvDir = "./.venv";
+              buildInputs = with pkgs.python312Packages; [
+                python
+                pip
+                pkgs.ruff
+                pkgs.uv
+                pkgs.jre
+                venvShellHook
+                pytest
+                snowpark-connect
+              ];
+            };
           };
 
         packages = {
