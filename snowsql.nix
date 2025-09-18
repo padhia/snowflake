@@ -1,32 +1,38 @@
-{ lib
-, stdenv
-, fetchurl
-, rpmextract
-, patchelf
-, makeWrapper
-, libz
-, openssl
-, libxcrypt-legacy
+{
+  lib,
+  stdenv,
+  fetchurl,
+  rpmextract,
+  patchelf,
+  makeWrapper,
+  libz,
+  openssl,
+  libxcrypt-legacy,
 }:
 
 stdenv.mkDerivation rec {
   pname = "snowsql";
-  version = "1.4.4";
+  version = "1.4.5";
 
-  src = let
-    sources = {
-      x86_64-linux = {
-        url = "https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.4/linux_x86_64/snowflake-snowsql-${version}-1.x86_64.rpm";
-        sha256 = "sha256-rLUOMZySCkc/eM4T0A29ULvaZvqOuep2ycFNmKtv6J8=";
+  src =
+    let
+      sources = {
+        x86_64-linux = {
+          url = "https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.4/linux_x86_64/snowflake-snowsql-${version}-1.x86_64.rpm";
+          sha256 = "sha256-H4mVFCAcuGlspSxdwwr9Hbw0aGqnJQwMj4lM1FGKfkQ=";
+        };
+        aarch64-linux = {
+          url = "https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.4/linux_aarch64/snowflake-snowsql-${version}-1.aarch64.rpm";
+          sha256 = "sha256-8YkfJZExgmA04jKAmVyw/Yqi0GL0hVbFkAKTuZaDJsU=";
+        };
       };
-      aarch64-linux = {
-        url = "https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.4/linux_aarch64/snowflake-snowsql-${version}-1.aarch64.rpm";
-        sha256 = "sha256-Ol+N/trv2ay6j1UAuzwD6IEIk3UNhcZhRfMEBXzsyOs=";
-      };
-    };
-  in fetchurl sources."${stdenv.system}";
+    in
+    fetchurl sources."${stdenv.system}";
 
-  nativeBuildInputs = [ rpmextract makeWrapper ];
+  nativeBuildInputs = [
+    rpmextract
+    makeWrapper
+  ];
 
   libPath = lib.makeLibraryPath [
     libz
@@ -55,7 +61,13 @@ stdenv.mkDerivation rec {
     homepage = "https://www.snowflake.com";
     sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     license = licenses.unfree;
-    maintainers = with maintainers; [ andehen padhia ];
-    platforms = [ "x86_64-linux" "aarch64-linux" ];
+    maintainers = with maintainers; [
+      andehen
+      padhia
+    ];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
   };
 }
