@@ -1,31 +1,32 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, pythonOlder
-, pythonAtLeast
-, mypy-protobuf
-, protoc-wheel-0
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  pythonOlder,
+  pythonAtLeast,
+  mypy-protobuf,
+  protoc-wheel-0,
 
-, cloudpickle
-, protobuf
-, python-dateutil
-, pyyaml
-, setuptools
-, snowflake-connector-python
-, typing-extensions
-, tzlocal
-, wheel
+  cloudpickle,
+  protobuf,
+  python-dateutil,
+  pyyaml,
+  setuptools,
+  snowflake-connector-python,
+  typing-extensions,
+  tzlocal,
+  wheel,
 }:
 
 buildPythonPackage rec {
   pname = "snowflake-snowpark-python";
-  version = "1.38.0";
+  version = "1.39.0";
   pyproject = true;
 
   src = fetchPypi {
     inherit version;
     pname = "snowflake_snowpark_python";
-    hash = "sha256-d4xAd2OZwJhGx3qo+bU3c9nBXnk+UMYAnuzK+7Qzdcw=";
+    hash = "sha256-Drp6bTtshsBrlTkFm2DRrsT+xFtAndtox+lrnuEUIe8=";
   };
 
   disabled = pythonOlder "3.9" || pythonAtLeast "3.14";
