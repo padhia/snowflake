@@ -35,13 +35,13 @@
 
 buildPythonPackage rec {
   pname     = "snowflake-ml-python";
-  version   = "1.12.0";
+  version   = "1.14.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_ml_python";
     inherit version;
-    hash = "sha256-jrmyip0UYPbCg5ifHioyRd0plNI1QXUjR1iGMGrPjoA=";
+    hash = "sha256-nQIBK6zjNVurF6bjohg+/EsW0kpENqHxu2LxRU75YZ0=";
   };
 
   disabled = pythonOlder "3.9";
