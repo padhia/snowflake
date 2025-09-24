@@ -31,6 +31,7 @@
 
       overlays.default = final: prev: {
         snowsql = prev.callPackage ./snowsql.nix { };
+        snowflake-cli = prev.callPackage ./snowflake-cli.nix { };
         pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [ pyOverlay ];
       };
 
