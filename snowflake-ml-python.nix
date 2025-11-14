@@ -6,7 +6,6 @@
   pythonOlder,
   setuptools,
 
-  absl-py,
   anyio,
   cachetools,
   cloudpickle,
@@ -16,6 +15,7 @@
   numpy,
   packaging,
   pandas,
+  platformdirs,
   pyarrow,
   pydantic,
   pyjwt,
@@ -36,13 +36,13 @@
 
 buildPythonPackage rec {
   pname = "snowflake-ml-python";
-  version = "1.18.0";
+  version = "1.19.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_ml_python";
     inherit version;
-    hash = "sha256-cPcPrgvMmHSs9Ey81sN6tT/HFKLde2HMPepeSNKCW/U=";
+    hash = "sha256-wcCn4Ptxh/iwr7xM+88sx0JrU/lDcQTmFK+xonKn4Y4=";
   };
 
   disabled = pythonOlder "3.10";
@@ -54,7 +54,6 @@ buildPythonPackage rec {
   ];
 
   dependencies = [
-    absl-py
     anyio
     cachetools
     cloudpickle
@@ -64,6 +63,7 @@ buildPythonPackage rec {
     numpy
     packaging
     pandas
+    platformdirs
     pyarrow
     pydantic
     pyjwt
