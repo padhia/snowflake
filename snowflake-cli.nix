@@ -8,14 +8,14 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "snowflake-cli";
-  version = "3.13.1";
+  version = "3.14.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "snowflakedb";
     repo = "snowflake-cli";
     tag = "v${version}";
-    hash = "sha256-2cZ9tRcQ/sWHkkSXMZ9pXP4zM3OsNbKr2kR/Ob/F9Hk=";
+    hash = "sha256-j5ZX7ftzI59B7hZRh0dU9YDO+30xdTGsFlKsjRB8bF8=";
   };
 
   build-system = with python3Packages; [
@@ -43,7 +43,8 @@ python3Packages.buildPythonApplication rec {
     prompt-toolkit
     snowflake-core
     snowflake-connector-python
-  ];
+    snowflake-snowpark-python
+  ] ++ snowflake-connector-python.optional-dependencies.secure-local-storage;
 
   nativeCheckInputs = with python3Packages; [
     pytestCheckHook
