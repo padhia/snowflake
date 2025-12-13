@@ -13,17 +13,19 @@
     let
       pyOverlay = py-final: py-prev: {
         protoc-wheel-0 = py-final.callPackage ./protoc-wheel-0.nix { };
+
+        modin = py-final.callPackage ./modin.nix { };
         snowflake-ml-python = py-final.callPackage ./snowflake-ml-python.nix { };
         snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix { };
         snowpark-connect = py-final.callPackage ./snowpark-connect.nix { };
 
         snowflake-connector-python = py-prev.snowflake-connector-python.overridePythonAttrs (old: rec {
-          version = "4.1.0";
+          version = "4.1.1";
           src = py-final.pkgs.fetchFromGitHub {
             owner = "snowflakedb";
             repo = "snowflake-connector-python";
             tag = "v${version}";
-            hash = "sha256-ZRSbUPYSeUYEy6VEJbipIh+PLk/SR1hpGdRsM5ibN0Q=";
+            hash = "sha256-SfpsqnbLDAUwRTFDXYDlZoiaFNoEA/7WIx6JP/2LvTw=";
           };
           doCheck = false;
         });

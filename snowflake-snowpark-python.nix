@@ -16,17 +16,20 @@
   typing-extensions,
   tzlocal,
   wheel,
+  modin,
+  tqdm,
+  ipywidgets,
 }:
 
 buildPythonPackage rec {
   pname = "snowflake-snowpark-python";
-  version = "1.42.0";
+  version = "1.43.0";
   pyproject = true;
 
   src = fetchPypi {
     inherit version;
     pname = "snowflake_snowpark_python";
-    hash = "sha256-6ZSzhgyBbRtf3wxicvjZ5BUF5HAUCwY/+UGNI0/YzAA=";
+    hash = "sha256-KCr8y4umAomiY6QvMEC3YsIW7vTmSjrqCK192pigff8=";
   };
 
   disabled = pythonOlder "3.9" || pythonAtLeast "3.14";
@@ -54,9 +57,18 @@ buildPythonPackage rec {
     wheel
   ];
 
-  optional-dependencies = {
-    "pandas" = [ snowflake-connector-python.optional-dependencies.pandas ];
-  };
+  optional-dependencies =
+    let
+      pandas = snowflake-connector-python.optional-dependencies.pandas;
+    in
+    {
+      inherit pandas;
+      modin = pandas ++ [
+        modin
+        tqdm
+        ipywidgets
+      ];
+    };
 
   doCheck = false;
 

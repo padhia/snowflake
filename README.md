@@ -14,6 +14,8 @@ This flake provides Snowflake applications, packages, development shells and an 
 - `snowflake-connector-python` (1)
 - `snowflake-sqlalchemy` (1)
 - `snowpark-ml-python` (2)
+- `snowflake-labs-mcp`
+- `modin`
 
 1. Only available if the latest version of the package in `nixos-unstable` is outdated
 2. Frequently broken due to not supporting more recent versions of dependencies available in `nixpkgs`
