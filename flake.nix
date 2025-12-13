@@ -31,11 +31,11 @@
         });
 
         snowflake-core = py-prev.snowflake-core.overridePythonAttrs (old: rec {
-          version = "1.9.0";
+          version = "1.10.0";
           src = py-final.pkgs.fetchPypi {
             pname = "snowflake_core";
             inherit version;
-            hash = "sha256-EIOgGITpzOuT3AdcmbvJrp16/YCL88/4wANiTTXxGdA=";
+            hash = "sha256-JC2WNa6gbcKl5UlM62B3x22pO9EC725bR31oIMfSCdk=";
           };
           doCheck = false;
         });
