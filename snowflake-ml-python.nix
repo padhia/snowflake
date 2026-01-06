@@ -9,7 +9,9 @@
   anyio,
   cachetools,
   cloudpickle,
+  cmdstanpy,
   cryptography,
+  datasets,
   fsspec,
   importlib-resources,
   numpy,
@@ -36,13 +38,13 @@
 
 buildPythonPackage rec {
   pname = "snowflake-ml-python";
-  version = "1.19.0";
+  version = "1.21.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_ml_python";
     inherit version;
-    hash = "sha256-wcCn4Ptxh/iwr7xM+88sx0JrU/lDcQTmFK+xonKn4Y4=";
+    hash = "sha256-pX68nkTNSumMmlcdgHjaB00qNTUqyXx5jh/V/RwcrVE=";
   };
 
   disabled = pythonOlder "3.10";
@@ -57,7 +59,9 @@ buildPythonPackage rec {
     anyio
     cachetools
     cloudpickle
+    cmdstanpy
     cryptography
+    datasets
     fsspec
     importlib-resources
     numpy

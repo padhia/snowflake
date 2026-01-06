@@ -74,7 +74,7 @@
                       venvShellHook
                       pytest
                     ]
-                    ++ (builtins.map (name: pyPkgs.${name}) addPkgNames);
+                    ++ (map (name: pyPkgs.${name}) addPkgNames);
                 };
               py312Shell = pyShell pkgs.python312Packages;
               py313Shell = pyShell pkgs.python313Packages;
@@ -98,8 +98,8 @@
                 "jupyterlab"
                 "streamlit"
               ];
-              ml = py312Shell "ml" [ "snowflake-ml-python" ];
-              ml-lab = py312Shell "ml-lab" [
+              ml = py313Shell "ml" [ "snowflake-ml-python" ];
+              ml-lab = py313Shell "ml-lab" [
                 "snowflake-ml-python"
                 "jupyterlab"
               ];
