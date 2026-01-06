@@ -30,6 +30,21 @@
           doCheck = false;
         });
 
+        mcp = py-prev.mcp.overridePythonAttrs (old: rec {
+          version = "1.15.0";
+          src = py-final.pkgs.fetchFromGitHub {
+            owner = "modelcontextprotocol";
+            repo = "python-sdk";
+            tag = "v${version}";
+            hash = "sha256-pvbrNkGfQaZX95JZyYXuuH2gMzWouuGXjaDxPyKW0Zw=";
+          };
+          doCheck = false;
+        });
+
+        fastmcp = py-prev.fastmcp.overridePythonAttrs (old: {
+          doCheck = false;
+        });
+
         snowflake-core = py-prev.snowflake-core.overridePythonAttrs (old: rec {
           version = "1.10.0";
           src = py-final.pkgs.fetchPypi {
