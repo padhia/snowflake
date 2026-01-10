@@ -31,8 +31,8 @@ name           | Python | Packages
 `snowpark312`  | 3.12   | `snowflake-snowpark-python`
 `lab`          | 3.13   | `snowflake-connector-python`, `jupyterlab`, `streamlit`
 `snowpark-lab` | 3.13   | `snowflake-snowpark-python`, `jupyterlab`, `streamlit`
-`ml`           | 3.12   | `snowflake-ml-python`
-`ml-lab`       | 3.12   | `snowflake-ml-python` `jupyterlab`
+`ml`           | 3.13   | `snowflake-ml-python`
+`ml-lab`       | 3.13   | `snowflake-ml-python` `jupyterlab`
 
 All of the above `devShells` include `pip`, `ruff`, `uv`, and `pytest`
 
