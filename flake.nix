@@ -39,6 +39,29 @@
           };
           doCheck = false;
         });
+
+        py-key-value-aio = py-prev.py-key-value-aio.overridePythonAttrs (old: rec {
+          version = "0.3.0";
+          src = py-final.pkgs.fetchFromGitHub {
+            owner = "strawgate";
+            repo = "py-key-value";
+            tag = version;
+            hash = "sha256-4ji+GzJTv1QnC5n/OaL9vR65j8BQmJsVGGnjjuulDiU=";
+          };
+          doCheck = false;
+        });
+
+        rocksdict = py-prev.rocksdict.overridePythonAttrs (old: rec {
+          version = "0.3.29";
+          src = py-final.pkgs.fetchFromGitHub {
+            owner = "rocksdict";
+            repo = "RocksDict";
+            tag = "v${version}";
+            fetchSubmodules = true;
+            hash = "sha256-yP+OAVioKOGPvcYM8s1TTNHzzaFxw1sUQDrWxmptuJo=";
+          };
+          doCheck = false;
+        });
       };
 
       overlays.default = final: prev: {
