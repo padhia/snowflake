@@ -20,12 +20,12 @@
         snowpark-connect = py-final.callPackage ./snowpark-connect.nix { };
 
         snowflake-connector-python = py-prev.snowflake-connector-python.overridePythonAttrs (old: rec {
-          version = "4.2.0";
+          version = "4.3.0";
           src = py-final.pkgs.fetchFromGitHub {
             owner = "snowflakedb";
             repo = "snowflake-connector-python";
             tag = "v${version}";
-            hash = "sha256-u2DIgW0W9oXSif2lIDqhlIopaXzQRS0x6tyHiYPGFLM=";
+            hash = "sha256-bJK6U5lomcPMGeKEmv+9m+uM5+3GJKKUA3dEwP/ynVo=";
           };
           doCheck = false;
         });
