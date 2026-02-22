@@ -27,15 +27,10 @@ buildPythonPackage rec {
   src = fetchPypi {
     inherit version;
     pname = "modin";
-    hash = "";
+    hash = "sha256-QO2+r8K44H/aYis4R17AtNWAy48M35kH8cWMHYS5p5Y=";
   };
 
   disabled = pythonOlder "3.9";
-
-  pythonRelaxDeps = [
-    "cloudpickle"
-    "protobuf"
-  ];
 
   build-system = [
     setuptools
@@ -66,7 +61,7 @@ buildPythonPackage rec {
   meta = with lib; {
     description = "Modin: Scale your Pandas workflows by changing a single line of code";
     homepage = "https://github.com/modin-project/modin";
-    license = licenses.apsl20;
+    license = licenses.asl20;
     maintainers = with maintainers; [ padhia ];
   };
 }
