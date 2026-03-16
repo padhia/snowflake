@@ -44,6 +44,5 @@ python3Packages.buildPythonApplication rec {
     description = "Snowflake MCP Server";
     homepage = "https://github.com/Snowflake-Labs/mcp";
     license = licenses.asl20;
-    maintainers = with maintainers; [ padhia ];
   };
 }

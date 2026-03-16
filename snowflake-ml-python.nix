@@ -38,13 +38,13 @@
 
 buildPythonPackage rec {
   pname = "snowflake-ml-python";
-  version = "1.29.0";
+  version = "1.30.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_ml_python";
     inherit version;
-    hash = "sha256-cubKiPoZU+uf3yB8B6aBQvzkq7KdIs02xdvHnT3T8xo=";
+    hash = "sha256-LBAladKcGx3DcPQ7gI2r/e0OHuGFzZgcklOkKEP1Cy8=";
   };
 
   disabled = pythonOlder "3.10";
@@ -95,6 +95,5 @@ buildPythonPackage rec {
     description = "Snowflake Python API for Resource Management";
     homepage = "https://docs.snowflake.com/en/developer-guide/snowpark/index";
     license = licenses.asl20;
-    maintainers = with maintainers; [ padhia ];
   };
 }

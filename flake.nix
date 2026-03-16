@@ -19,26 +19,15 @@
         snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix { };
         snowpark-connect = py-final.callPackage ./snowpark-connect.nix { };
 
-        snowflake-connector-python = py-prev.snowflake-connector-python.overridePythonAttrs (old: rec {
-          version = "4.3.0";
-          src = py-final.pkgs.fetchFromGitHub {
-            owner = "snowflakedb";
-            repo = "snowflake-connector-python";
-            tag = "v${version}";
-            hash = "sha256-bJK6U5lomcPMGeKEmv+9m+uM5+3GJKKUA3dEwP/ynVo=";
-          };
-          doCheck = false;
-        });
+        snowflake-connector-python = py-final.callPackage ./snowflake-connector-python.nix {
+          snowflake-connector-python = py-prev.snowflake-connector-python;
+          fetchFromGitHub = py-final.pkgs.fetchFromGitHub;
+        };
 
-        snowflake-core = py-prev.snowflake-core.overridePythonAttrs (old: rec {
-          version = "1.11.0";
-          src = py-final.pkgs.fetchPypi {
-            pname = "snowflake_core";
-            inherit version;
-            hash = "sha256-qNwgnEXUE8P+DrGpOb32R6BapNkWwEJBbeljYYhVU5I=";
-          };
-          doCheck = false;
-        });
+        snowflake-core = py-final.callPackage ./snowflake-core.nix {
+          snowflake-core = py-prev.snowflake-core;
+          fetchPypi = py-final.fetchPypi;
+        };
       };
 
       overlays.default = final: prev: {
@@ -122,6 +111,16 @@
 
           packages = {
             inherit (pkgs) snowsql snowflake-cli snowflake-labs-mcp;
+            inherit (pkgs.python313Packages)
+              snowflake-connector-python
+              snowflake-core
+              snowflake-snowpark-python
+              snowflake-ml-python
+              modin
+              ;
+            inherit (pkgs.python312Packages)
+              snowpark-connect
+              ;
           };
 
         in

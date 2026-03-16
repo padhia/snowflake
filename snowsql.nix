@@ -61,10 +61,6 @@ stdenv.mkDerivation rec {
     homepage = "https://www.snowflake.com";
     sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     license = licenses.unfree;
-    maintainers = with maintainers; [
-      andehen
-      padhia
-    ];
     platforms = [
       "x86_64-linux"
       "aarch64-linux"

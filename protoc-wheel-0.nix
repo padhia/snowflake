@@ -43,7 +43,6 @@ buildPythonPackage rec {
     description = "Google protobuf compiler protoc";
     homepage = "https://pypi.org/project/protoc-wheel-0";
     license = licenses.asl20;
-    maintainers = with maintainers; [ padhia ];
     platforms = builtins.attrNames sources;
   };
 }

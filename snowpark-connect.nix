@@ -1,42 +1,43 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, pythonOlder
-, pythonAtLeast
-, setuptools
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  pythonOlder,
+  pythonAtLeast,
+  setuptools,
 
-, certifi
-, cloudpickle
-, fsspec
-, jpype1
-, protobuf
-, s3fs
-, snowflake-core
-, snowflake-snowpark-python
-, sqlglot
-, jaydebeapi
-, aiobotocore
+  certifi,
+  cloudpickle,
+  fsspec,
+  jpype1,
+  protobuf,
+  s3fs,
+  snowflake-core,
+  snowflake-snowpark-python,
+  sqlglot,
+  jaydebeapi,
+  aiobotocore,
 
-# The following are dependencies for the vendored pyspark
-, py4j
-, pandas
-, pyarrow
-, grpcio
-, grpcio-status
-, googleapis-common-protos
-, numpy
-, distutils
+  # The following are dependencies for the vendored pyspark
+  py4j,
+  pandas,
+  pyarrow,
+  grpcio,
+  grpcio-status,
+  googleapis-common-protos,
+  numpy,
+  distutils,
 }:
 
 buildPythonPackage rec {
   pname = "snowpark-connect";
-  version = "0.27.0";
+  version = "1.17.0";
   pyproject = true;
 
   src = fetchPypi {
     inherit version;
     pname = "snowpark_connect";
-    hash = "sha256-vYBU835nbCUR57pgicXAsCoTAoGO1rs3/9MCJW/xEBY=";
+    hash = "sha256-Vyyr3o5ngsLsmvr63VP1BNzolbNM+7+RIPjfoKZKQu4=";
   };
 
   disabled = pythonOlder "3.9" || pythonAtLeast "3.13";
@@ -74,7 +75,9 @@ buildPythonPackage rec {
     googleapis-common-protos
     numpy
     distutils
-  ] ++ fsspec.optional-dependencies.http ++ snowflake-snowpark-python.optional-dependencies.pandas;
+  ]
+  ++ fsspec.optional-dependencies.http
+  ++ snowflake-snowpark-python.optional-dependencies.pandas;
 
   doCheck = false;
 
@@ -87,6 +90,5 @@ buildPythonPackage rec {
     description = "Snowpark Connect Python API";
     homepage = "https://docs.snowflake.com/en/developer-guide/snowpark-connect/snowpark-connect-overview";
     license = licenses.asl20;
-    maintainers = with maintainers; [ padhia ];
   };
 }

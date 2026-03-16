@@ -23,13 +23,13 @@
 
 buildPythonPackage rec {
   pname = "snowflake-snowpark-python";
-  version = "1.46.0";
+  version = "1.47.0";
   pyproject = true;
 
   src = fetchPypi {
     inherit version;
     pname = "snowflake_snowpark_python";
-    hash = "sha256-ECDLCGDWqFCYLJ4vyOtdwtLKVYc6zOYD4kPCeIl5Osc=";
+    hash = "sha256-5LS/skpStQ/jJ0aTX7bQM3GD1X05Z+zQAcXOvkppWlQ=";
   };
 
   disabled = pythonOlder "3.9" || pythonAtLeast "3.14";
@@ -81,6 +81,5 @@ buildPythonPackage rec {
     description = "Snowflake Snowpark Python API";
     homepage = "https://github.com/snowflakedb/snowpark-python";
     license = licenses.asl20;
-    maintainers = with maintainers; [ padhia ];
   };
 }

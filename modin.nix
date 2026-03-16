@@ -62,6 +62,6 @@ buildPythonPackage rec {
     description = "Modin: Scale your Pandas workflows by changing a single line of code";
     homepage = "https://github.com/modin-project/modin";
     license = licenses.asl20;
-    maintainers = with maintainers; [ padhia ];
+    # maintainers = with maintainers; [ padhia ];
   };
 }
