@@ -4,12 +4,12 @@
 }:
 
 snowflake-connector-python.overridePythonAttrs (old: rec {
-  version = "4.3.0";
+  version = "4.4.0";
   src = fetchFromGitHub {
     owner = "snowflakedb";
     repo = "snowflake-connector-python";
     tag = "v${version}";
-    hash = "sha256-bJK6U5lomcPMGeKEmv+9m+uM5+3GJKKUA3dEwP/ynVo=";
+    hash = "sha256-fgvqUBs6uuf9A8ZEsw1LfpqKXOtGNWRL+Q/2NQqv3ig=";
   };
   doCheck = false;
 })
