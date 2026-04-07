@@ -32,7 +32,7 @@ buildPythonPackage rec {
     hash = "sha256-MJVVjXzFQxBq2hVfsC5jDwRGcIkZ9cxbKsq5l+uZQz4=";
   };
 
-  disabled = pythonOlder "3.9" || pythonAtLeast "3.14";
+  disabled = pythonOlder "3.9" || pythonAtLeast "3.15";
 
   pythonRelaxDeps = [
     "cloudpickle"
@@ -63,6 +63,7 @@ buildPythonPackage rec {
     in
     {
       inherit pandas;
+      inherit (snowflake-connector-python.optional-dependencies) secure-local-storage;
       modin = pandas ++ [
         modin
         tqdm
