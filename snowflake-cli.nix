@@ -8,14 +8,14 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "snowflake-cli";
-  version = "3.16.0";
+  version = "3.17.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "snowflakedb";
     repo = "snowflake-cli";
     tag = "v${version}";
-    hash = "sha256-0n1h7zg0mUyCKRsunP5mlV8pNx9YS5CHup6wSyJvlVQ=";
+    hash = "sha256-yVrjAam3EIZxdRoqscE/a/IC6dhoESv3qZEZV3MeZJU=";
   };
 
   build-system = with python3Packages; [
@@ -32,6 +32,7 @@ python3Packages.buildPythonApplication rec {
       id
       jinja2
       pluggy
+      protobuf
       pyyaml
       rich
       requests

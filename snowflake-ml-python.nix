@@ -11,8 +11,8 @@
   cloudpickle,
   cmdstanpy,
   cryptography,
-  datasets,
   fsspec,
+  h2,
   importlib-resources,
   numpy,
   packaging,
@@ -24,27 +24,26 @@
   pytimeparse,
   pyyaml,
   retrying,
-  s3fs,
   scikit-learn,
   scipy,
   shap,
   snowflake-connector-python,
-  snowflake-core,
   snowflake-snowpark-python,
   sqlparse,
+  tqdm,
   typing-extensions,
   xgboost,
 }:
 
 buildPythonPackage rec {
   pname = "snowflake-ml-python";
-  version = "1.37.0";
+  version = "1.38.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_ml_python";
     inherit version;
-    hash = "sha256-NXd5B/HLYU3p7nNRQz+8i+EbR4J+wIDdfHK/SSv/pm8=";
+    hash = "sha256-6OK+yo1qs3XsaIWVxkiXK1dRwx4XZl63iPTbEU3v3cs=";
   };
 
   disabled = pythonOlder "3.10";
@@ -61,8 +60,8 @@ buildPythonPackage rec {
     cloudpickle
     cmdstanpy
     cryptography
-    datasets
     fsspec
+    h2
     importlib-resources
     numpy
     packaging
@@ -74,14 +73,13 @@ buildPythonPackage rec {
     pytimeparse
     pyyaml
     retrying
-    s3fs
     scikit-learn
     scipy
     shap
     snowflake-connector-python
     snowflake-snowpark-python
-    snowflake-core
     sqlparse
+    tqdm
     typing-extensions
     xgboost
   ]
