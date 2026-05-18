@@ -6,13 +6,13 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "snowflake-labs-mcp";
-  version = "1.4.1";
+  version = "1.4.2";
   pyproject = true;
 
   src = fetchPypi {
     inherit version;
     pname = "snowflake_labs_mcp";
-    hash = "sha256-n/1MG3EFtenKWhiuPatS/NEA/wP8aycoZlSAjVBc1xY=";
+    hash = "sha256-rrh3If2yveoSc0s4TQPg6fN8Kk7/WEV7ufiSVAPmMDY=";
   };
 
   disabled = python3Packages.pythonOlder "3.11";
