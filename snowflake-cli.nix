@@ -8,14 +8,14 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "snowflake-cli";
-  version = "3.17.1";
+  version = "3.18.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "snowflakedb";
     repo = "snowflake-cli";
     tag = "v${version}";
-    hash = "sha256-7OCOTjMbSD3fnJiQEYFub+5y02VIH/f3yb8SV7SiRHg=";
+    hash = "sha256-Qj9wMlxpf1JRZBkpItpWMAF3nBZCS3UkOeP+4fFGjHs=";
   };
 
   build-system = with python3Packages; [
@@ -47,6 +47,7 @@ python3Packages.buildPythonApplication rec {
       snowflake-core
       snowflake-connector-python
       snowflake-snowpark-python
+      websocket-client
     ]
     ++ snowflake-connector-python.optional-dependencies.secure-local-storage;
 

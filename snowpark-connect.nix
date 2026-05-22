@@ -31,13 +31,13 @@
 
 buildPythonPackage rec {
   pname = "snowpark-connect";
-  version = "1.27.0";
+  version = "1.28.0";
   pyproject = true;
 
   src = fetchPypi {
     inherit version;
     pname = "snowpark_connect";
-    hash = "sha256-2PDbRaWyR0ANYfqiuRb8bDFs4NBtNVSHaRCVVd+n8Qk=";
+    hash = "sha256-Z2pNeDYSOBmMGT7CbQKSN4tyI1yY+sIEEA5ij+CnrOM=";
   };
 
   disabled = pythonOlder "3.9" || pythonAtLeast "3.13";
