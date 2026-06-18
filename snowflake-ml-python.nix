@@ -15,6 +15,7 @@
   h2,
   importlib-resources,
   numpy,
+  orjson,
   packaging,
   pandas,
   platformdirs,
@@ -37,13 +38,13 @@
 
 buildPythonPackage rec {
   pname = "snowflake-ml-python";
-  version = "1.41.0";
+  version = "1.43.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_ml_python";
     inherit version;
-    hash = "sha256-D+TmBRvNCVkABRemDqSS8TJuBX3mryB/WtIvH0Xh9j4=";
+    hash = "sha256-dRuoHzw6HwaDAdzX6cCo60eWgF1lIC5r6o72yXOSKyU=";
   };
 
   disabled = pythonOlder "3.10";
@@ -64,6 +65,7 @@ buildPythonPackage rec {
     h2
     importlib-resources
     numpy
+    orjson
     packaging
     pandas
     platformdirs
