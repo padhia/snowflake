@@ -8,14 +8,14 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "snowflake-cli";
-  version = "3.21.0";
+  version = "3.22.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "snowflakedb";
     repo = "snowflake-cli";
     tag = "v${version}";
-    hash = "sha256-zJtYn0NkiBRITZpS/6iW7g9yRYNmtaMpCxfLLiy/2SE=";
+    hash = "sha256-+H0EkB7dnTUQ469nkkIOPVTtqfeIxGBO0JYT6UvPKD8=";
   };
 
   build-system = with python3Packages; [
