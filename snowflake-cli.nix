@@ -29,24 +29,27 @@ python3Packages.buildPythonApplication rec {
   dependencies =
     with python3Packages;
     [
+      click
+      gitpython
+      pyyaml
       id
       jinja2
+      packaging
+      pip
       pluggy
+      prompt-toolkit
       protobuf
-      pyyaml
-      rich
+      pydantic
       requests
       requirements-parser
+      rich
       setuptools
+      snowflake-connector-python
+      snowflake-snowpark-python
+      snowflake-core
       tomlkit
       typer
       urllib3
-      gitpython
-      pydantic
-      prompt-toolkit
-      snowflake-core
-      snowflake-connector-python
-      snowflake-snowpark-python
       websocket-client
     ]
     ++ snowflake-connector-python.optional-dependencies.secure-local-storage;
