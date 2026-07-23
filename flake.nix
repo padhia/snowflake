@@ -67,30 +67,28 @@
                     ]
                     ++ (map (name: pyPkgs.${name}) addPkgNames);
                 };
-              py312Shell = pyShell pkgs.python312Packages;
-              py313Shell = pyShell pkgs.python313Packages;
+              py3Shell = pyShell pkgs.python3Packages;
 
             in
             {
-              default = py313Shell "snowflake" [
+              default = py3Shell "snowflake" [
                 "snowflake-connector-python"
                 "keyring"
               ];
-              lab = py313Shell "snowflake-lab" [
+              lab = py3Shell "snowflake-lab" [
                 "snowflake-connector-python"
                 "keyring"
                 "jupyterlab"
                 "streamlit"
               ];
-              snowpark312 = py312Shell "snowpark" [ "snowflake-snowpark-python" ];
-              snowpark = py313Shell "snowpark" [ "snowflake-snowpark-python" ];
-              snowpark-lab = py313Shell "snowpark-lab" [
+              snowpark = py3Shell "snowpark" [ "snowflake-snowpark-python" ];
+              snowpark-lab = py3Shell "snowpark-lab" [
                 "snowflake-snowpark-python"
                 "jupyterlab"
                 "streamlit"
               ];
-              ml = py313Shell "ml" [ "snowflake-ml-python" ];
-              ml-lab = py313Shell "ml-lab" [
+              ml = py3Shell "ml" [ "snowflake-ml-python" ];
+              ml-lab = py3Shell "ml-lab" [
                 "snowflake-ml-python"
                 "jupyterlab"
               ];
