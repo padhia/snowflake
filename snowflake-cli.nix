@@ -8,14 +8,14 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "snowflake-cli";
-  version = "3.23.0";
+  version = "3.24.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "snowflakedb";
     repo = "snowflake-cli";
     tag = "v${version}";
-    hash = "sha256-6HOP5Vg4R4t5h0Xi5dol8OixgfHa5DRQvFxLolgKRy8=";
+    hash = "sha256-jNOjqJ+gJJuf6+7woMypKn2SAEb1LrocPIhe160sqjM=";
   };
 
   build-system = with python3Packages; [
@@ -40,6 +40,7 @@ python3Packages.buildPythonApplication rec {
       prompt-toolkit
       protobuf
       pydantic
+      python-dotenv
       requests
       requirements-parser
       rich
