@@ -4,11 +4,11 @@
 }:
 
 snowflake-core.overridePythonAttrs (old: rec {
-  version = "1.12.1";
+  version = "1.13.1";
   src = fetchPypi {
     pname = "snowflake_core";
     inherit version;
-    hash = "sha256-bLECcQHXxtoS/vZQQf8qUahaOU27HwrAlQAMoFTyan4=";
+    hash = "sha256-nweqQPd/HjAvGIEkh6+v1J9/0rSTkuoD8RW8WrbLABU=";
   };
   doCheck = false;
 })
