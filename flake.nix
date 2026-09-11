@@ -35,7 +35,6 @@
       overlays.default = final: prev: {
         snowsql = prev.callPackage ./snowsql.nix { };
         snowflake-cli = prev.callPackage ./snowflake-cli.nix { };
-        snowflake-labs-mcp = prev.callPackage ./snowflake-labs-mcp.nix { };
         pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [ pyOverlay ];
       };
 
@@ -110,8 +109,8 @@
             };
 
           packages = {
-            inherit (pkgs) snowsql snowflake-cli snowflake-labs-mcp;
-            inherit (pkgs.python313Packages)
+            inherit (pkgs) snowsql snowflake-cli;
+            inherit (pkgs.python3Packages)
               snowflake-connector-python
               snowflake-core
               snowflake-snowpark-python

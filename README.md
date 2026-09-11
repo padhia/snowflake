@@ -17,11 +17,10 @@ nix develop github:padhia/snowflake#snowpark
 
 ## Applications
 
-| Package | Description | Platforms |
-|---------|-------------|-----------|
+| Package         | Description                                                                                                     | Platforms    |
+| --------------- | --------------------------------------------------------------------------------------------------------------- | ------------ |
 | `snowflake-cli` | Official [Snowflake CLI](https://docs.snowflake.com/en/developer-guide/snowflake-cli-v2/index) (`snow` command) | Linux, macOS |
-| `snowsql` | Legacy SQL CLI for running queries | Linux only |
-| `snowflake-labs-mcp` | [Snowflake MCP Server](https://github.com/snowflakedb/mcp) | Linux, macOS |
+| `snowsql`       | Legacy SQL CLI for running queries                                                                              | Linux only   |
 
 ### Running Applications
 
@@ -37,29 +36,28 @@ nix profile install github:padhia/snowflake#snowflake-cli
 
 The following packages are available via the overlay:
 
-| Package | Description | Notes |
-|---------|-------------|-------|
-| `snowflake-snowpark-python` | Snowpark Python API | |
-| `snowflake-connector-python` | Python connector for Snowflake | Updated when nixpkgs is outdated |
-| `snowflake-core` | Core Snowflake library | Updated when nixpkgs is outdated |
-| `snowflake-ml-python` | Snowflake ML library | May break with newer dependencies |
-| `snowpark-connect` | Spark Connect API for Snowpark | Requires JRE |
-| `modin` | Scalable pandas replacement | |
+| Package                      | Description                    | Notes                             |
+| ---------------------------- | ------------------------------ | --------------------------------- |
+| `snowflake-snowpark-python`  | Snowpark Python API            |                                   |
+| `snowflake-connector-python` | Python connector for Snowflake | Updated when nixpkgs is outdated  |
+| `snowflake-core`             | Core Snowflake library         | Updated when nixpkgs is outdated  |
+| `snowflake-ml-python`        | Snowflake ML library           | May break with newer dependencies |
+| `snowpark-connect`           | Spark Connect API for Snowpark | Requires JRE                      |
+| `modin`                      | Scalable pandas replacement    |                                   |
 
 ## Development Shells
 
 Pre-configured environments for Snowflake development. All shells include: `python`, `pip`, `ruff`, `uv`, `pytest`, and `venvShellHook`.
 
-| Shell | Python | Packages |
-|-------|--------|----------|
-| `default` | 3.13 | `snowflake-connector-python`, `keyring` |
-| `lab` | 3.13 | `snowflake-connector-python`, `keyring`, `jupyterlab`, `streamlit` |
-| `snowpark` | 3.13 | `snowflake-snowpark-python` |
-| `snowpark312` | 3.12 | `snowflake-snowpark-python` |
-| `snowpark-lab` | 3.13 | `snowflake-snowpark-python`, `jupyterlab`, `streamlit` |
-| `ml` | 3.13 | `snowflake-ml-python` |
-| `ml-lab` | 3.13 | `snowflake-ml-python`, `jupyterlab` |
-| `snowpark-connect` | 3.12 | `snowpark-connect` (includes JRE) |
+| Shell              | Packages                                                           |
+| ------------------ | ------------------------------------------------------------------ |
+| `default`          | `snowflake-connector-python`, `keyring`                            |
+| `lab`              | `snowflake-connector-python`, `keyring`, `jupyterlab`, `streamlit` |
+| `snowpark`         | `snowflake-snowpark-python`                                        |
+| `snowpark-lab`     | `snowflake-snowpark-python`, `jupyterlab`, `streamlit`             |
+| `ml`               | `snowflake-ml-python`                                              |
+| `ml-lab`           | `snowflake-ml-python`, `jupyterlab`                                |
+| `snowpark-connect` | `snowpark-connect` (includes JRE)                                  |
 
 ### Using Development Shells
 
@@ -130,7 +128,7 @@ Add the overlay to your flake to access all packages:
 {
   home.packages = [
     pkgs.snowflake-cli
-    (pkgs.python313.withPackages (ps: [
+    (pkgs.python3.withPackages (ps: [
       ps.snowflake-snowpark-python
       ps.snowflake-connector-python
     ]))
@@ -161,7 +159,7 @@ Add the overlay to your flake to access all packages:
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
           snowflake-cli
-          (python313.withPackages (ps: with ps; [
+          (python3.withPackages (ps: with ps; [
             snowflake-snowpark-python
             pandas
             pytest
