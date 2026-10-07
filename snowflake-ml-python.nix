@@ -14,6 +14,7 @@
   fsspec,
   h2,
   importlib-resources,
+  jinja2,
   numpy,
   orjson,
   packaging,
@@ -38,13 +39,13 @@
 
 buildPythonPackage rec {
   pname = "snowflake-ml-python";
-  version = "2.3.0";
+  version = "2.4.0";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_ml_python";
     inherit version;
-    hash = "sha256-8uBzmknH43/4haXlr1lbZZ43+ZS3l6Zi0vnY9gopfTk=";
+    hash = "sha256-dituOOtPXl7I/d8u45U0679TzJPwLYXKI4BMkHp1824=";
   };
 
   disabled = pythonOlder "3.10";
@@ -64,6 +65,7 @@ buildPythonPackage rec {
     fsspec
     h2
     importlib-resources
+    jinja2
     numpy
     orjson
     packaging
