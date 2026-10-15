@@ -16,10 +16,12 @@
 
         modin = py-final.callPackage ./modin.nix { };
         snowflake-ml-python = py-final.callPackage ./snowflake-ml-python.nix { };
+        snowflake-sandbox-python = py-final.callPackage ./snowflake-sandbox-python.nix { };
+        snowpark-connect = py-final.callPackage ./snowpark-connect.nix { };
+
         snowflake-snowpark-python = py-final.callPackage ./snowflake-snowpark-python.nix {
           mypy-protobuf = py-final.mypy-protobuf_3_6;
         };
-        snowpark-connect = py-final.callPackage ./snowpark-connect.nix { };
 
         snowflake-connector-python = py-final.callPackage ./snowflake-connector-python.nix {
           snowflake-connector-python = py-prev.snowflake-connector-python;
