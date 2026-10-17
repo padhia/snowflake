@@ -28,6 +28,10 @@
           fetchFromGitHub = py-final.pkgs.fetchFromGitHub;
         };
 
+        snowflake-connector-python5 = py-final.callPackage ./snowflake-connector-python5.nix {
+          protobuf = py-final.protobuf6;
+        };
+
         snowflake-core = py-final.callPackage ./snowflake-core.nix {
           snowflake-core = py-prev.snowflake-core;
           fetchPypi = py-final.fetchPypi;
@@ -82,6 +86,10 @@
                 "jupyterlab"
                 "streamlit"
               ];
+              connector5 = py3Shell "snowflake-connector5" [
+                "snowflake-connector-python5"
+                "keyring"
+              ];
               snowpark = py3Shell "snowpark" [ "snowflake-snowpark-python" ];
               snowpark-lab = py3Shell "snowpark-lab" [
                 "snowflake-snowpark-python"
@@ -114,6 +122,7 @@
             inherit (pkgs) snowsql snowflake-cli;
             inherit (pkgs.python3Packages)
               snowflake-connector-python
+              snowflake-connector-python5
               snowflake-core
               snowflake-snowpark-python
               snowflake-ml-python

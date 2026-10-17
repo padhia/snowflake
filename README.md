@@ -40,6 +40,7 @@ The following packages are available via the overlay:
 | ---------------------------- | ------------------------------ | --------------------------------- |
 | `snowflake-snowpark-python`  | Snowpark Python API            |                                   |
 | `snowflake-connector-python` | Python connector for Snowflake | Updated when nixpkgs is outdated  |
+| `snowflake-connector-python5` | Connector v5 (universal driver) | Pre-built wheels; conflicts with v4 |
 | `snowflake-core`             | Core Snowflake library         | Updated when nixpkgs is outdated  |
 | `snowflake-ml-python`        | Snowflake ML library           | May break with newer dependencies |
 | `snowpark-connect`           | Spark Connect API for Snowpark | Requires JRE                      |
@@ -53,6 +54,7 @@ Pre-configured environments for Snowflake development. All shells include: `pyth
 | ------------------ | ------------------------------------------------------------------ |
 | `default`          | `snowflake-connector-python`, `keyring`                            |
 | `lab`              | `snowflake-connector-python`, `keyring`, `jupyterlab`, `streamlit` |
+| `connector5`       | `snowflake-connector-python5`, `keyring`                           |
 | `snowpark`         | `snowflake-snowpark-python`                                        |
 | `snowpark-lab`     | `snowflake-snowpark-python`, `jupyterlab`, `streamlit`             |
 | `ml`               | `snowflake-ml-python`                                              |
