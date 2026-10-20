@@ -51,7 +51,7 @@ python3Packages.buildPythonApplication rec {
       snowflake-core
       snowflake-sandbox-python
       tomlkit
-      typer
+      typer_alt
       urllib3
       websocket-client
     ]

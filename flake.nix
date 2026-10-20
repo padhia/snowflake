@@ -36,6 +36,12 @@
           snowflake-core = py-prev.snowflake-core;
           fetchPypi = py-final.fetchPypi;
         };
+
+        typer_alt = py-final.callPackage ./typer_alt.nix {
+          typer = py-prev.typer;
+          click = py-final.click;
+          fetchPypi = py-final.fetchPypi;
+        };
       };
 
       overlays.default = final: prev: {
