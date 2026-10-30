@@ -19,32 +19,32 @@
 # Installed from pre-built wheels (the sdist requires a full cargo workspace build);
 # on Linux autoPatchelfHook rewrites the native extensions to use Nix store libraries.
 let
-  version = "5.0.0";
+  version = "5.1.0";
 
   platforms = {
     x86_64-linux = {
-      cp311 = { platform = "manylinux_2_28_x86_64"; hash = "sha256-j0aMmw8UM6QbXsRvAwqWZWn0CyOYglo3M7PvIksS/+8="; };
-      cp312 = { platform = "manylinux_2_28_x86_64"; hash = "sha256-qXFgyY2d3sr4MpoiI/FWkVZrpoHos6f9gn7pwl5HMoc="; };
-      cp313 = { platform = "manylinux_2_28_x86_64"; hash = "sha256-BxowIRSf2lMeQmFX2rDRN8dy9c24nQNRajqsdRkmGDc="; };
-      cp314 = { platform = "manylinux_2_28_x86_64"; hash = "sha256-dOtoC2nvj2mQxCpmvZiD6y4lIHpcrvnjZsz1F+klkog="; };
+      cp311 = { platform = "manylinux_2_28_x86_64"; hash = "sha256-7QUkolAHo4ULnsm2it+jhmym2LMnMxuYCnZWWfkFPfA="; };
+      cp312 = { platform = "manylinux_2_28_x86_64"; hash = "sha256-6JnZ1pvH+0CrUxw/NASdBk2uV/zEgF0MKGqjVXDmg94="; };
+      cp313 = { platform = "manylinux_2_28_x86_64"; hash = "sha256-j+48HKFWFojl1DKYRQRserTHBpuwA9kps5RZGA0AyH8="; };
+      cp314 = { platform = "manylinux_2_28_x86_64"; hash = "sha256-vmDqcScSEsUWnUf7hrLpQGxqYotupqzUEEj5EwHRyZ8="; };
     };
     aarch64-linux = {
-      cp311 = { platform = "manylinux_2_28_aarch64"; hash = "sha256-CjN3BiHymis32bfrIAYDAMAjaKsJzUrXiuvqK3mcg+Q="; };
-      cp312 = { platform = "manylinux_2_28_aarch64"; hash = "sha256-rHkw2XBwclHvZkbrmO+Og2xARkLCDcDRXRWXlisll7w="; };
-      cp313 = { platform = "manylinux_2_28_aarch64"; hash = "sha256-8gD9iLMlXGSaHq9/LCT3tbXpPyslAgqwPWuNBVIAUU4="; };
-      cp314 = { platform = "manylinux_2_28_aarch64"; hash = "sha256-OSay3w9XzmcgL+fVw5nwJugG/i9UMaUDkhUEPVdN5zA="; };
+      cp311 = { platform = "manylinux_2_28_aarch64"; hash = "sha256-BIzUK0V5wkrRVoW8RpxXrt1lzQBTicFtO631TzcMnuc="; };
+      cp312 = { platform = "manylinux_2_28_aarch64"; hash = "sha256-frUzoHXa47drlWfs3LbGbVe5cVbMQ2bzSYQ+SfKVdGo="; };
+      cp313 = { platform = "manylinux_2_28_aarch64"; hash = "sha256-7O7T819KYBHWDaSISXV09epYdgLV4os8A6J4TVIqTBk="; };
+      cp314 = { platform = "manylinux_2_28_aarch64"; hash = "sha256-r5JGlUQ0p8jjoqonONZkfoqqF0SewTWSwW2vcqwMkRk="; };
     };
     x86_64-darwin = {
-      cp311 = { platform = "macosx_10_14_x86_64"; hash = "sha256-qjfyPkapOdiul975PCJKuI1pzu4M5ZDvCkMwT0Zn3jA="; };
-      cp312 = { platform = "macosx_10_14_x86_64"; hash = "sha256-cEK1j86v/OvyFWLkFE/jwi++VibzvN6LRyNkaIGPuQg="; };
-      cp313 = { platform = "macosx_10_14_x86_64"; hash = "sha256-ghawBupcCPSuHhTERA249IgcZxaQ9zyJAn+BzLLwzA4="; };
-      cp314 = { platform = "macosx_10_15_x86_64"; hash = "sha256-gzSK7OcP0K0OTmDXFjYYjWnoBnL8uH0gL6uDIXqU47c="; };
+      cp311 = { platform = "macosx_10_14_x86_64"; hash = "sha256-MFz+ahonqotENf1bKk1cH2Kt0mwwmGSVQl9qk3q66oE="; };
+      cp312 = { platform = "macosx_10_14_x86_64"; hash = "sha256-hvtgys6YndbSd2miv//AteiUCVd2FAAG5sV/1LUGUHA="; };
+      cp313 = { platform = "macosx_10_14_x86_64"; hash = "sha256-p9wAnywdy8CK7oNCShNRd5nF0mT1ehtRJfjtLJKuFgI="; };
+      cp314 = { platform = "macosx_10_15_x86_64"; hash = "sha256-GwLfncfYQE9Y0YFSJ3vgpjPyfqkez4CA0Z24pd1vbvw="; };
     };
     aarch64-darwin = {
-      cp311 = { platform = "macosx_11_0_arm64"; hash = "sha256-/xKAJCp3oDYvsFchPBvAcerpDmzqvFBeCymTAcpWO8c="; };
-      cp312 = { platform = "macosx_11_0_arm64"; hash = "sha256-Iyb6euRNXZFj1wu4LhIxfphkQT/Y2sIGIDtHsbp+Lgk="; };
-      cp313 = { platform = "macosx_11_0_arm64"; hash = "sha256-MzA9FX8kV/Q5iVriBIX3uT5+I7S/wT9xTD3LIbn17bM="; };
-      cp314 = { platform = "macosx_11_0_arm64"; hash = "sha256-d86MAG4Mdl+suLb7BaIMhwRGAtChan7AnHefOAmVkYM="; };
+      cp311 = { platform = "macosx_11_0_arm64"; hash = "sha256-8uQJs6QEw0e3F/AHBTarV8YJqZLP32qNChULpK58Qbo="; };
+      cp312 = { platform = "macosx_11_0_arm64"; hash = "sha256-Ul7KSvJK7Sf+1IyFAMKixkkLYTs4EyYKhn1EMPwI3L4="; };
+      cp313 = { platform = "macosx_11_0_arm64"; hash = "sha256-ZFt1y+zffSXZooqesOolmhECOibZHM19/P1SHhhJNwU="; };
+      cp314 = { platform = "macosx_11_0_arm64"; hash = "sha256-6QmSRG4wUxxHaLk0YfRwde6ddmOq9F8Bos+sXHUpx5k="; };
     };
   };
 

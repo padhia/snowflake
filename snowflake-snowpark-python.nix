@@ -23,13 +23,13 @@
 
 buildPythonPackage rec {
   pname = "snowflake-snowpark-python";
-  version = "1.55.2";
+  version = "1.56.0";
   pyproject = true;
 
   src = fetchPypi {
     inherit version;
     pname = "snowflake_snowpark_python";
-    hash = "sha256-zlOeCQF8v2hwpH2Tpq2otsLfr6gIwFcwigoDa/qyDEs=";
+    hash = "sha256-j9N85keK8fl1xr2xKG/WHUHHerHDbE8MeDHQf1tFpQc=";
   };
 
   disabled = pythonOlder "3.9" || pythonAtLeast "3.15";
