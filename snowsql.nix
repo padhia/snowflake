@@ -12,18 +12,19 @@
 
 stdenv.mkDerivation rec {
   pname = "snowsql";
-  version = "1.4.5";
+  version = "1.5.4";
 
   src =
     let
+      series = lib.versions.majorMinor version;
       sources = {
         x86_64-linux = {
-          url = "https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.4/linux_x86_64/snowflake-snowsql-${version}-1.x86_64.rpm";
-          sha256 = "sha256-H4mVFCAcuGlspSxdwwr9Hbw0aGqnJQwMj4lM1FGKfkQ=";
+          url = "https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/${series}/linux_x86_64/snowflake-snowsql-${version}-1.x86_64.rpm";
+          sha256 = "sha256-Z/FDGMkGJ8AV45GBWjWgwUiABvw+r6yErbQF0YTRHhI=";
         };
         aarch64-linux = {
-          url = "https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.4/linux_aarch64/snowflake-snowsql-${version}-1.aarch64.rpm";
-          sha256 = "sha256-8YkfJZExgmA04jKAmVyw/Yqi0GL0hVbFkAKTuZaDJsU=";
+          url = "https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/${series}/linux_aarch64/snowflake-snowsql-${version}-1.aarch64.rpm";
+          sha256 = "sha256-l4ytsNujnDwQNsl0oAaKMY+2iXhFO2/g1q+NUDM3taU=";
         };
       };
     in

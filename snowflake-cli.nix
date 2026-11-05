@@ -7,13 +7,13 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "snowflake-cli";
-  version = "3.31.0";
+  version = "3.32.1";
   pyproject = true;
 
   src = fetchPypi {
     pname = "snowflake_cli";
     inherit version;
-    hash = "sha256-Tey/uCiPnSNMxzpBEkur2sHEUynPQ+5lNNP19WvMxjI=";
+    hash = "sha256-I1SP4WVNR0vbOrhvzbLPir7lwXoumE1d0Q00gCRsVjI=";
   };
 
   build-system = with python3Packages; [
